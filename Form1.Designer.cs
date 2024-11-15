@@ -114,7 +114,6 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 27.11111F));
             tableLayoutPanel1.Size = new Size(800, 450);
             tableLayoutPanel1.TabIndex = 5;
-            tableLayoutPanel1.Paint += tableLayoutPanel1_Paint;
             // 
             // frmLogIn
             // 

@@ -32,24 +32,24 @@
             btnAbrirPuerta1min = new Button();
             btnSalir = new Button();
             grbClientes = new GroupBox();
-            btnEditarClientes = new Button();
+            btnGestionarClientes = new Button();
             btnIngresos = new Button();
             grbClientesPago = new GroupBox();
-            btnCargarPago = new Button();
-            txtDniAbono = new TextBox();
-            txtMonto = new TextBox();
-            lblDniClienteAbono = new Label();
-            lblMontoPago = new Label();
-            rbtTransferencia = new RadioButton();
             rbtEfectivo = new RadioButton();
-            dataGridView1 = new DataGridView();
-            lblBuscarDni = new Label();
-            textBox1 = new TextBox();
+            rbtTransferencia = new RadioButton();
+            lblMontoPago = new Label();
+            lblDniClienteAbono = new Label();
+            txtMonto = new TextBox();
+            txtDniAbono = new TextBox();
+            btnCargarPago = new Button();
+            dgvClientes = new DataGridView();
+            txtBusqueda = new TextBox();
             grbListaClientes = new GroupBox();
+            cmbFiltrado = new ComboBox();
             btnBuscarDni = new Button();
             grbClientes.SuspendLayout();
             grbClientesPago.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             grbListaClientes.SuspendLayout();
             SuspendLayout();
             // 
@@ -83,7 +83,7 @@
             // 
             // grbClientes
             // 
-            grbClientes.Controls.Add(btnEditarClientes);
+            grbClientes.Controls.Add(btnGestionarClientes);
             grbClientes.Controls.Add(btnIngresos);
             grbClientes.Location = new Point(12, 47);
             grbClientes.Name = "grbClientes";
@@ -92,24 +92,25 @@
             grbClientes.TabStop = false;
             grbClientes.Text = "Clientes";
             // 
-            // btnEditarClientes
+            // btnGestionarClientes
             // 
-            btnEditarClientes.Location = new Point(29, 71);
-            btnEditarClientes.Name = "btnEditarClientes";
-            btnEditarClientes.Size = new Size(113, 29);
-            btnEditarClientes.TabIndex = 4;
-            btnEditarClientes.Text = "Editar Clientes";
-            btnEditarClientes.UseVisualStyleBackColor = true;
-            btnEditarClientes.Click += button1_Click;
+            btnGestionarClientes.Location = new Point(14, 71);
+            btnGestionarClientes.Name = "btnGestionarClientes";
+            btnGestionarClientes.Size = new Size(147, 29);
+            btnGestionarClientes.TabIndex = 4;
+            btnGestionarClientes.Text = "Gestionar Clientes";
+            btnGestionarClientes.UseVisualStyleBackColor = true;
+            btnGestionarClientes.Click += button1_Click;
             // 
             // btnIngresos
             // 
-            btnIngresos.Location = new Point(29, 36);
+            btnIngresos.Location = new Point(14, 36);
             btnIngresos.Name = "btnIngresos";
-            btnIngresos.Size = new Size(113, 29);
+            btnIngresos.Size = new Size(147, 29);
             btnIngresos.TabIndex = 5;
             btnIngresos.Text = "Ingresos";
             btnIngresos.UseVisualStyleBackColor = true;
+            btnIngresos.Click += btnIngresos_Click;
             // 
             // grbClientesPago
             // 
@@ -127,46 +128,16 @@
             grbClientesPago.TabStop = false;
             grbClientesPago.Text = "Pagos";
             // 
-            // btnCargarPago
+            // rbtEfectivo
             // 
-            btnCargarPago.Location = new Point(441, 26);
-            btnCargarPago.Name = "btnCargarPago";
-            btnCargarPago.Size = new Size(113, 89);
-            btnCargarPago.TabIndex = 5;
-            btnCargarPago.Text = "Cargar Pago";
-            btnCargarPago.UseVisualStyleBackColor = true;
-            // 
-            // txtDniAbono
-            // 
-            txtDniAbono.Location = new Point(91, 38);
-            txtDniAbono.Name = "txtDniAbono";
-            txtDniAbono.Size = new Size(166, 27);
-            txtDniAbono.TabIndex = 6;
-            // 
-            // txtMonto
-            // 
-            txtMonto.Location = new Point(91, 71);
-            txtMonto.Name = "txtMonto";
-            txtMonto.Size = new Size(166, 27);
-            txtMonto.TabIndex = 7;
-            // 
-            // lblDniClienteAbono
-            // 
-            lblDniClienteAbono.AutoSize = true;
-            lblDniClienteAbono.Location = new Point(17, 41);
-            lblDniClienteAbono.Name = "lblDniClienteAbono";
-            lblDniClienteAbono.Size = new Size(35, 20);
-            lblDniClienteAbono.TabIndex = 8;
-            lblDniClienteAbono.Text = "DNI";
-            // 
-            // lblMontoPago
-            // 
-            lblMontoPago.AutoSize = true;
-            lblMontoPago.Location = new Point(17, 74);
-            lblMontoPago.Name = "lblMontoPago";
-            lblMontoPago.Size = new Size(53, 20);
-            lblMontoPago.TabIndex = 9;
-            lblMontoPago.Text = "Monto";
+            rbtEfectivo.AutoSize = true;
+            rbtEfectivo.Location = new Point(301, 70);
+            rbtEfectivo.Name = "rbtEfectivo";
+            rbtEfectivo.Size = new Size(83, 24);
+            rbtEfectivo.TabIndex = 11;
+            rbtEfectivo.TabStop = true;
+            rbtEfectivo.Text = "Efectivo";
+            rbtEfectivo.UseVisualStyleBackColor = true;
             // 
             // rbtTransferencia
             // 
@@ -179,49 +150,70 @@
             rbtTransferencia.Text = "Transferencia";
             rbtTransferencia.UseVisualStyleBackColor = true;
             // 
-            // rbtEfectivo
+            // lblMontoPago
             // 
-            rbtEfectivo.AutoSize = true;
-            rbtEfectivo.Location = new Point(301, 70);
-            rbtEfectivo.Name = "rbtEfectivo";
-            rbtEfectivo.Size = new Size(83, 24);
-            rbtEfectivo.TabIndex = 11;
-            rbtEfectivo.TabStop = true;
-            rbtEfectivo.Text = "Efectivo";
-            rbtEfectivo.UseVisualStyleBackColor = true;
+            lblMontoPago.AutoSize = true;
+            lblMontoPago.Location = new Point(17, 74);
+            lblMontoPago.Name = "lblMontoPago";
+            lblMontoPago.Size = new Size(53, 20);
+            lblMontoPago.TabIndex = 9;
+            lblMontoPago.Text = "Monto";
             // 
-            // dataGridView1
+            // lblDniClienteAbono
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(9, 60);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(767, 265);
-            dataGridView1.TabIndex = 7;
+            lblDniClienteAbono.AutoSize = true;
+            lblDniClienteAbono.Location = new Point(17, 41);
+            lblDniClienteAbono.Name = "lblDniClienteAbono";
+            lblDniClienteAbono.Size = new Size(35, 20);
+            lblDniClienteAbono.TabIndex = 8;
+            lblDniClienteAbono.Text = "DNI";
             // 
-            // lblBuscarDni
+            // txtMonto
             // 
-            lblBuscarDni.AutoSize = true;
-            lblBuscarDni.Location = new Point(11, 29);
-            lblBuscarDni.Name = "lblBuscarDni";
-            lblBuscarDni.Size = new Size(106, 20);
-            lblBuscarDni.TabIndex = 13;
-            lblBuscarDni.Text = "Buscar por Dni";
+            txtMonto.Location = new Point(91, 71);
+            txtMonto.Name = "txtMonto";
+            txtMonto.Size = new Size(166, 27);
+            txtMonto.TabIndex = 7;
             // 
-            // textBox1
+            // txtDniAbono
             // 
-            textBox1.Location = new Point(133, 26);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(166, 27);
-            textBox1.TabIndex = 12;
+            txtDniAbono.Location = new Point(91, 38);
+            txtDniAbono.Name = "txtDniAbono";
+            txtDniAbono.Size = new Size(166, 27);
+            txtDniAbono.TabIndex = 6;
+            // 
+            // btnCargarPago
+            // 
+            btnCargarPago.Location = new Point(441, 26);
+            btnCargarPago.Name = "btnCargarPago";
+            btnCargarPago.Size = new Size(113, 89);
+            btnCargarPago.TabIndex = 5;
+            btnCargarPago.Text = "Cargar Pago";
+            btnCargarPago.UseVisualStyleBackColor = true;
+            // 
+            // dgvClientes
+            // 
+            dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvClientes.Location = new Point(9, 60);
+            dgvClientes.Name = "dgvClientes";
+            dgvClientes.RowHeadersWidth = 51;
+            dgvClientes.RowTemplate.Height = 29;
+            dgvClientes.Size = new Size(767, 265);
+            dgvClientes.TabIndex = 7;
+            // 
+            // txtBusqueda
+            // 
+            txtBusqueda.Location = new Point(200, 25);
+            txtBusqueda.Name = "txtBusqueda";
+            txtBusqueda.Size = new Size(166, 27);
+            txtBusqueda.TabIndex = 12;
             // 
             // grbListaClientes
             // 
+            grbListaClientes.Controls.Add(cmbFiltrado);
             grbListaClientes.Controls.Add(btnBuscarDni);
-            grbListaClientes.Controls.Add(dataGridView1);
-            grbListaClientes.Controls.Add(lblBuscarDni);
-            grbListaClientes.Controls.Add(textBox1);
+            grbListaClientes.Controls.Add(dgvClientes);
+            grbListaClientes.Controls.Add(txtBusqueda);
             grbListaClientes.Location = new Point(3, 223);
             grbListaClientes.Name = "grbListaClientes";
             grbListaClientes.Size = new Size(795, 338);
@@ -229,9 +221,19 @@
             grbListaClientes.TabStop = false;
             grbListaClientes.Text = "Lista de Clientes";
             // 
+            // cmbFiltrado
+            // 
+            cmbFiltrado.FormattingEnabled = true;
+            cmbFiltrado.Items.AddRange(new object[] { "DNI", "Nombre" });
+            cmbFiltrado.Location = new Point(9, 25);
+            cmbFiltrado.Name = "cmbFiltrado";
+            cmbFiltrado.Size = new Size(185, 28);
+            cmbFiltrado.TabIndex = 14;
+            cmbFiltrado.Text = "Buscar por..";
+            // 
             // btnBuscarDni
             // 
-            btnBuscarDni.Location = new Point(317, 25);
+            btnBuscarDni.Location = new Point(372, 24);
             btnBuscarDni.Name = "btnBuscarDni";
             btnBuscarDni.Size = new Size(113, 29);
             btnBuscarDni.TabIndex = 6;
@@ -252,10 +254,11 @@
             Name = "frmMenu";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Menu";
+            Load += frmMenu_Load;
             grbClientes.ResumeLayout(false);
             grbClientesPago.ResumeLayout(false);
             grbClientesPago.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
             grbListaClientes.ResumeLayout(false);
             grbListaClientes.PerformLayout();
             ResumeLayout(false);
@@ -267,7 +270,7 @@
         private Button btnAbrirPuerta1min;
         private Button btnSalir;
         private GroupBox grbClientes;
-        private Button btnEditarClientes;
+        private Button btnGestionarClientes;
         private Button btnIngresos;
         private GroupBox grbClientesPago;
         private Button btnCargarPago;
@@ -277,10 +280,10 @@
         private TextBox txtDniAbono;
         private RadioButton rbtEfectivo;
         private RadioButton rbtTransferencia;
-        private DataGridView dataGridView1;
-        private Label lblBuscarDni;
-        private TextBox textBox1;
+        private DataGridView dgvClientes;
+        private TextBox txtBusqueda;
         private GroupBox grbListaClientes;
         private Button btnBuscarDni;
+        private ComboBox cmbFiltrado;
     }
 }
