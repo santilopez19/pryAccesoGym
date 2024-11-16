@@ -20,9 +20,10 @@ namespace pryAccesoGym
             InitializeComponent();
             cmbFiltrado.Items.Add("DNI");
             cmbFiltrado.Items.Add("Nombre");
-            cmbFiltrado.SelectedIndex = 0; 
+            cmbFiltrado.SelectedIndex = 0;
             CargarPagos();
             dgvClientes.RowHeadersVisible = false;
+            dgvClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
         }
         private void button1_Click(object sender, EventArgs e)
@@ -60,28 +61,25 @@ namespace pryAccesoGym
         {
             try
             {
-                // Consulta para obtener los pagos con nombre y apellido
                 string query = @"
-            SELECT 
-                p.DNI AS 'Documento', 
-                c.Nombre AS 'Nombre', 
-                c.Apellido AS 'Apellido', 
-                p.Monto AS 'Monto Pagado', 
-                p.MetodoPago AS 'Método de Pago', 
-                p.FechaPago AS 'Fecha de Pago' 
-            FROM 
-                Pagos p
-            JOIN 
-                Clientes c 
-            ON 
-                p.DNI = c.DNI
-            ORDER BY 
-                p.FechaPago DESC";
+        SELECT 
+            p.PagoID AS 'PagoID',
+            p.DNI AS 'Documento', 
+            c.Nombre AS 'Nombre', 
+            c.Apellido AS 'Apellido', 
+            p.Monto AS 'Monto Pagado', 
+            p.MetodoPago AS 'Método de Pago', 
+            p.FechaPago AS 'Fecha de Pago'
+        FROM 
+            Pagos p
+        JOIN 
+            Clientes c 
+        ON 
+            p.DNI = c.DNI
+        ORDER BY 
+            p.FechaPago DESC";
 
-                // Ejecutar la consulta y obtener los resultados
                 DataTable dataTable = DatabaseHelper.ExecuteQuery(query);
-
-                // Asignar los resultados al DataGridView
                 dgvClientes.DataSource = dataTable;
             }
             catch (Exception ex)
@@ -89,6 +87,7 @@ namespace pryAccesoGym
                 MessageBox.Show("Error al cargar los pagos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         private void txtDniAbono_TextChanged(object sender, EventArgs e)
@@ -256,6 +255,124 @@ namespace pryAccesoGym
             catch (Exception ex)
             {
                 MessageBox.Show("Error al realizar la búsqueda: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Verificar si hay una fila seleccionada
+                if (dgvClientes.CurrentRow != null)
+                {
+                    // Obtener el PagoID del registro seleccionado
+                    int pagoID = Convert.ToInt32(dgvClientes.CurrentRow.Cells["PagoID"].Value);
+
+                    // Confirmar antes de eliminar
+                    DialogResult result = MessageBox.Show("¿Estás seguro de que deseas eliminar este pago?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        // Consulta para eliminar el pago utilizando PagoID
+                        string query = "DELETE FROM Pagos WHERE PagoID = @PagoID";
+
+                        int filasAfectadas = DatabaseHelper.ExecuteNonQuery(query, new SqlParameter[]
+                        {
+                    new SqlParameter("@PagoID", pagoID)
+                        });
+
+                        if (filasAfectadas > 0)
+                        {
+                            MessageBox.Show("Pago eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            CargarPagos(); // Actualizar el DataGridView después de eliminar
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo eliminar el pago.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, selecciona un pago para eliminar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar el pago: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                txtDniAbono.Text = dgvClientes.Rows[e.RowIndex].Cells["Documento"].Value.ToString();
+                txtMonto.Text = dgvClientes.Rows[e.RowIndex].Cells["Monto Pagado"].Value.ToString();
+                string metodoPago = dgvClientes.Rows[e.RowIndex].Cells["Método de Pago"].Value.ToString();
+
+                if (metodoPago == "Efectivo")
+                    rbtEfectivo.Checked = true;
+                else if (metodoPago == "Transferencia")
+                    rbtTransferencia.Checked = true;
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Verificar si hay una fila seleccionada
+                if (dgvClientes.CurrentRow != null)
+                {
+                    // Obtener el PagoID del registro seleccionado
+                    int pagoID = Convert.ToInt32(dgvClientes.CurrentRow.Cells["PagoID"].Value);
+                    string montoTexto = txtMonto.Text.Trim();
+                    decimal monto;
+
+                    // Validar el monto ingresado
+                    if (!decimal.TryParse(montoTexto, out monto))
+                    {
+                        MessageBox.Show("El monto ingresado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    // Determinar el método de pago
+                    string metodoPago = rbtEfectivo.Checked ? "Efectivo" : rbtTransferencia.Checked ? "Transferencia" : "";
+                    if (string.IsNullOrEmpty(metodoPago))
+                    {
+                        MessageBox.Show("Debe seleccionar un método de pago.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Consulta para modificar el pago utilizando PagoID
+                    string query = "UPDATE Pagos SET Monto = @Monto, MetodoPago = @MetodoPago WHERE PagoID = @PagoID";
+
+                    int filasAfectadas = DatabaseHelper.ExecuteNonQuery(query, new SqlParameter[]
+                    {
+                new SqlParameter("@Monto", monto),
+                new SqlParameter("@MetodoPago", metodoPago),
+                new SqlParameter("@PagoID", pagoID)
+                    });
+
+                    if (filasAfectadas > 0)
+                    {
+                        MessageBox.Show("Pago modificado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        CargarPagos(); // Actualizar el DataGridView después de modificar
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo modificar el pago.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, selecciona un pago para modificar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al modificar el pago: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

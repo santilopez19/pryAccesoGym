@@ -45,6 +45,8 @@
             btnCargarPago = new Button();
             txtBusqueda = new TextBox();
             grbListaClientes = new GroupBox();
+            btnModificar = new Button();
+            btnEliminar = new Button();
             cmbFiltrado = new ComboBox();
             btnBuscar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
@@ -55,6 +57,7 @@
             // 
             // dgvClientes
             // 
+            dgvClientes.AllowUserToAddRows = false;
             dgvClientes.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvClientes.Location = new Point(9, 60);
@@ -63,6 +66,8 @@
             dgvClientes.RowTemplate.Height = 29;
             dgvClientes.Size = new Size(767, 265);
             dgvClientes.TabIndex = 7;
+            dgvClientes.CellClick += dgvClientes_CellClick;
+            dgvClientes.CellContentClick += dgvClientes_CellClick;
             // 
             // btnAbrirPuerta
             // 
@@ -217,6 +222,8 @@
             // 
             // grbListaClientes
             // 
+            grbListaClientes.Controls.Add(btnModificar);
+            grbListaClientes.Controls.Add(btnEliminar);
             grbListaClientes.Controls.Add(cmbFiltrado);
             grbListaClientes.Controls.Add(btnBuscar);
             grbListaClientes.Controls.Add(dgvClientes);
@@ -227,6 +234,26 @@
             grbListaClientes.TabIndex = 14;
             grbListaClientes.TabStop = false;
             grbListaClientes.Text = "Lista de Pagos";
+            // 
+            // btnModificar
+            // 
+            btnModificar.Location = new Point(544, 23);
+            btnModificar.Name = "btnModificar";
+            btnModificar.Size = new Size(113, 29);
+            btnModificar.TabIndex = 17;
+            btnModificar.Text = "Modificar";
+            btnModificar.UseVisualStyleBackColor = true;
+            btnModificar.Click += btnModificar_Click;
+            // 
+            // btnEliminar
+            // 
+            btnEliminar.Location = new Point(663, 23);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(113, 29);
+            btnEliminar.TabIndex = 16;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // cmbFiltrado
             // 
@@ -293,5 +320,7 @@
         private GroupBox grbListaClientes;
         private Button btnBuscar;
         private ComboBox cmbFiltrado;
+        private Button btnEliminar;
+        private Button btnModificar;
     }
 }

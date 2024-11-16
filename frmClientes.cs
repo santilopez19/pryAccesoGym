@@ -15,6 +15,7 @@ namespace pryAccesoGym
             this.KeyDown += VolverPagina_KeyDown;
             CargarClientes();
             dgvClientes.RowHeadersVisible = false;
+            dgvClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         private void VolverPagina_KeyDown(object sender, KeyEventArgs e)
@@ -59,7 +60,7 @@ namespace pryAccesoGym
         VALUES (@DNI, @Nombre, @Apellido, @FechaNacimiento, @Sexo, @FechaIngreso)";
 
                 SqlParameter[] parameters = new SqlParameter[]
-                {
+                {   
             new SqlParameter("@DNI", txtDni.Text.Trim()),
             new SqlParameter("@Nombre", txtNombre.Text.Trim()),
             new SqlParameter("@Apellido", txtApellido.Text.Trim()),
@@ -152,8 +153,58 @@ namespace pryAccesoGym
             {
                 MessageBox.Show("Error al modificar el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
 
+
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Verifica si hay una fila seleccionada en el DataGridView
+                if (dgvClientes.SelectedRows.Count > 0)
+                {
+                    // Obtén el DNI del cliente seleccionado (suponiendo que la columna "DNI" es la primera)
+                    string dni = dgvClientes.SelectedRows[0].Cells["DNI"].Value.ToString();
+
+                    // Confirmar la eliminación
+                    DialogResult result = MessageBox.Show(
+                        "¿Estás seguro de que deseas eliminar este cliente?",
+                        "Confirmar eliminación",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        // Consulta SQL para eliminar el cliente basado en su DNI
+                        string query = "DELETE FROM Clientes WHERE DNI = @DNI";
+
+                        // Ejecutar la consulta
+                        int filasAfectadas = DatabaseHelper.ExecuteNonQuery(query, new SqlParameter[]
+                        {
+                    new SqlParameter("@DNI", dni)
+                        });
+
+                        if (filasAfectadas > 0)
+                        {
+                            MessageBox.Show("Cliente eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            CargarClientes(); // Actualizar la lista después de eliminar
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo eliminar el cliente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, selecciona un cliente para eliminar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

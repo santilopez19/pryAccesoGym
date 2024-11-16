@@ -44,6 +44,7 @@
             btnCrearUsuario = new Button();
             btnModificarUsuario = new Button();
             grbListaClientes = new GroupBox();
+            btnEliminar = new Button();
             cmbFiltrado = new ComboBox();
             btnBuscarDni = new Button();
             dgvClientes = new DataGridView();
@@ -173,7 +174,7 @@
             // 
             // btnCrearUsuario
             // 
-            btnCrearUsuario.Location = new Point(574, 23);
+            btnCrearUsuario.Location = new Point(647, 23);
             btnCrearUsuario.Name = "btnCrearUsuario";
             btnCrearUsuario.Size = new Size(115, 29);
             btnCrearUsuario.TabIndex = 23;
@@ -183,7 +184,7 @@
             // 
             // btnModificarUsuario
             // 
-            btnModificarUsuario.Location = new Point(695, 23);
+            btnModificarUsuario.Location = new Point(768, 23);
             btnModificarUsuario.Name = "btnModificarUsuario";
             btnModificarUsuario.Size = new Size(141, 29);
             btnModificarUsuario.TabIndex = 24;
@@ -193,6 +194,7 @@
             // 
             // grbListaClientes
             // 
+            grbListaClientes.Controls.Add(btnEliminar);
             grbListaClientes.Controls.Add(cmbFiltrado);
             grbListaClientes.Controls.Add(btnModificarUsuario);
             grbListaClientes.Controls.Add(btnBuscarDni);
@@ -201,10 +203,20 @@
             grbListaClientes.Controls.Add(txtBuscarClientes);
             grbListaClientes.Location = new Point(12, 196);
             grbListaClientes.Name = "grbListaClientes";
-            grbListaClientes.Size = new Size(842, 377);
+            grbListaClientes.Size = new Size(1087, 377);
             grbListaClientes.TabIndex = 25;
             grbListaClientes.TabStop = false;
             grbListaClientes.Text = "Lista de Clientes";
+            // 
+            // btnEliminar
+            // 
+            btnEliminar.Location = new Point(935, 23);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(146, 29);
+            btnEliminar.TabIndex = 25;
+            btnEliminar.Text = "Eliminar Usuario";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // cmbFiltrado
             // 
@@ -227,13 +239,15 @@
             // 
             // dgvClientes
             // 
+            dgvClientes.AllowUserToAddRows = false;
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvClientes.Location = new Point(5, 60);
             dgvClientes.Name = "dgvClientes";
             dgvClientes.RowHeadersWidth = 51;
             dgvClientes.RowTemplate.Height = 29;
-            dgvClientes.Size = new Size(831, 311);
+            dgvClientes.Size = new Size(1076, 311);
             dgvClientes.TabIndex = 7;
+            dgvClientes.CellClick += dgvClientes_CellClick;
             dgvClientes.CellContentClick += dgvClientes_CellClick;
             // 
             // txtBuscarClientes
@@ -247,7 +261,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(866, 585);
+            ClientSize = new Size(1111, 585);
             Controls.Add(grbListaClientes);
             Controls.Add(grbDatosPersonales);
             Name = "frmClientes";
@@ -284,5 +298,6 @@
         private TextBox txtBuscarClientes;
         private DateTimePicker dtpFechaIngreso;
         private Label lblFechaIngreso;
+        private Button btnEliminar;
     }
 }
