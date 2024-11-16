@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             btnIngresar = new Button();
             txtDniIngreso = new TextBox();
             lblAvisoIngreso = new Label();
+            tLbl = new System.Windows.Forms.Timer(components);
+            lblDniIngrese = new Label();
             SuspendLayout();
             // 
             // btnIngresar
@@ -41,6 +44,7 @@
             btnIngresar.TabIndex = 0;
             btnIngresar.Text = "Ingresar";
             btnIngresar.UseVisualStyleBackColor = true;
+            btnIngresar.Click += btnIngresar_Click;
             // 
             // txtDniIngreso
             // 
@@ -48,24 +52,39 @@
             txtDniIngreso.Name = "txtDniIngreso";
             txtDniIngreso.Size = new Size(187, 27);
             txtDniIngreso.TabIndex = 1;
-            txtDniIngreso.Text = "Ingrese su DNI aqui";
             txtDniIngreso.TextAlign = HorizontalAlignment.Center;
+            txtDniIngreso.TextChanged += txtDniIngreso_TextChanged;
             // 
             // lblAvisoIngreso
             // 
             lblAvisoIngreso.AutoSize = true;
-            lblAvisoIngreso.Location = new Point(377, 315);
+            lblAvisoIngreso.Location = new Point(320, 293);
             lblAvisoIngreso.Name = "lblAvisoIngreso";
-            lblAvisoIngreso.Size = new Size(57, 20);
+            lblAvisoIngreso.Size = new Size(0, 20);
             lblAvisoIngreso.TabIndex = 2;
-            lblAvisoIngreso.Text = "Ingrese";
             lblAvisoIngreso.Click += lblAvisoIngreso_Click;
+            // 
+            // tLbl
+            // 
+            tLbl.Interval = 5000;
+            tLbl.Tick += tLbl_Tick;
+            // 
+            // lblDniIngrese
+            // 
+            lblDniIngrese.AutoSize = true;
+            lblDniIngrese.Font = new Font("Arial Narrow", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            lblDniIngrese.Location = new Point(311, 127);
+            lblDniIngrese.Name = "lblDniIngrese";
+            lblDniIngrese.Size = new Size(208, 33);
+            lblDniIngrese.TabIndex = 3;
+            lblDniIngrese.Text = "INGRESE SU DNI ";
             // 
             // frmIngreso
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblDniIngrese);
             Controls.Add(lblAvisoIngreso);
             Controls.Add(txtDniIngreso);
             Controls.Add(btnIngresar);
@@ -82,5 +101,7 @@
         private Button btnIngresar;
         private TextBox txtDniIngreso;
         private Label lblAvisoIngreso;
+        private System.Windows.Forms.Timer tLbl;
+        private Label lblDniIngrese;
     }
 }

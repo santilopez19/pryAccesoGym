@@ -11,6 +11,18 @@ namespace pryAccesoGym
             // Cadena de conexión
             private static readonly string connectionString = "server=localhost; database=dbGimnasio; integrated security=true; Encrypt=False;";
 
+            public static object ExecuteScalar(string query, SqlParameter[] parameters)
+            {
+                using (SqlConnection connection = new SqlConnection("tu_cadena_de_conexion"))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddRange(parameters);
+                        connection.Open();
+                        return command.ExecuteScalar();
+                    }
+                }
+            }
             public static DataTable ExecuteQuery(string query, SqlParameter[] parameters = null)
             {
                 DataTable dataTable = new DataTable();

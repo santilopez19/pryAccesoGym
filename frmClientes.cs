@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using static pryAccesoGym.bdGimnasio;
 
+
 namespace pryAccesoGym
 {
     public partial class frmClientes : Form
