@@ -1,28 +1,17 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient; // Asegúrate de usar esta biblioteca
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
 
 namespace pryAccesoGym
 {
     internal class bdGimnasio
     {
-
         public static class DatabaseHelper
         {
             // Cadena de conexión
             private static readonly string connectionString = "server=localhost; database=dbGimnasio; integrated security=true; Encrypt=False;";
 
-            /// <summary>
-            /// Ejecuta una consulta SELECT y devuelve los resultados en un DataTable.
-            /// </summary>
-            /// <param name="query">Consulta SQL a ejecutar.</param>
-            /// <returns>DataTable con los resultados de la consulta.</returns>
-            public static DataTable ExecuteQuery(string query)
+            public static DataTable ExecuteQuery(string query, SqlParameter[] parameters = null)
             {
                 DataTable dataTable = new DataTable();
 
@@ -34,6 +23,11 @@ namespace pryAccesoGym
 
                         using (SqlCommand command = new SqlCommand(query, connection))
                         {
+                            if (parameters != null)
+                            {
+                                command.Parameters.AddRange(parameters);
+                            }
+
                             using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                             {
                                 adapter.Fill(dataTable);
@@ -43,18 +37,12 @@ namespace pryAccesoGym
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Error al ejecutar la consulta: " + ex.Message);
+                    throw new Exception("Error ejecutando la consulta: " + ex.Message);
                 }
 
                 return dataTable;
             }
 
-            /// <summary>
-            /// Ejecuta un comando SQL no relacionado con consultas SELECT (INSERT, UPDATE, DELETE).
-            /// </summary>
-            /// <param name="query">Consulta SQL a ejecutar.</param>
-            /// <param name="parameters">Parámetros para la consulta SQL.</param>
-            /// <returns>Número de filas afectadas.</returns>
             public static int ExecuteNonQuery(string query, SqlParameter[] parameters = null)
             {
                 try
@@ -81,6 +69,4 @@ namespace pryAccesoGym
             }
         }
     }
-
 }
-

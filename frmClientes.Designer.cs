@@ -35,28 +35,20 @@
             txtDni = new TextBox();
             lblDni = new Label();
             lblSexo = new Label();
-            lblUltPago = new Label();
-            txtMontoAbonado = new TextBox();
-            lblMontoAbonado = new Label();
-            txtMetPago = new TextBox();
-            lblMetodPago = new Label();
-            lblFechaIngreso = new Label();
             cmbSexo = new ComboBox();
             lblFechaNac = new Label();
             dtpFechaNac = new DateTimePicker();
-            dtpFechaIngreso = new DateTimePicker();
             grbDatosPersonales = new GroupBox();
-            grbPagos = new GroupBox();
-            dtpUltPago = new DateTimePicker();
+            dtpFechaIngreso = new DateTimePicker();
+            lblFechaIngreso = new Label();
             btnCrearUsuario = new Button();
             btnModificarUsuario = new Button();
             grbListaClientes = new GroupBox();
             cmbFiltrado = new ComboBox();
             btnBuscarDni = new Button();
             dgvClientes = new DataGridView();
-            textBox4 = new TextBox();
+            txtBuscarClientes = new TextBox();
             grbDatosPersonales.SuspendLayout();
-            grbPagos.SuspendLayout();
             grbListaClientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             SuspendLayout();
@@ -79,7 +71,7 @@
             // 
             // txtApellido
             // 
-            txtApellido.Location = new Point(76, 84);
+            txtApellido.Location = new Point(79, 83);
             txtApellido.Name = "txtApellido";
             txtApellido.Size = new Size(283, 27);
             txtApellido.TabIndex = 4;
@@ -87,7 +79,7 @@
             // lblApellido
             // 
             lblApellido.AutoSize = true;
-            lblApellido.Location = new Point(6, 87);
+            lblApellido.Location = new Point(9, 86);
             lblApellido.Name = "lblApellido";
             lblApellido.Size = new Size(66, 20);
             lblApellido.TabIndex = 3;
@@ -95,7 +87,7 @@
             // 
             // txtDni
             // 
-            txtDni.Location = new Point(76, 130);
+            txtDni.Location = new Point(79, 129);
             txtDni.Name = "txtDni";
             txtDni.Size = new Size(283, 27);
             txtDni.TabIndex = 6;
@@ -103,7 +95,7 @@
             // lblDni
             // 
             lblDni.AutoSize = true;
-            lblDni.Location = new Point(6, 133);
+            lblDni.Location = new Point(9, 132);
             lblDni.Name = "lblDni";
             lblDni.Size = new Size(35, 20);
             lblDni.TabIndex = 5;
@@ -112,75 +104,24 @@
             // lblSexo
             // 
             lblSexo.AutoSize = true;
-            lblSexo.Location = new Point(6, 221);
+            lblSexo.Location = new Point(413, 129);
             lblSexo.Name = "lblSexo";
             lblSexo.Size = new Size(41, 20);
             lblSexo.TabIndex = 7;
             lblSexo.Text = "Sexo";
             // 
-            // lblUltPago
-            // 
-            lblUltPago.AutoSize = true;
-            lblUltPago.Location = new Point(6, 41);
-            lblUltPago.Name = "lblUltPago";
-            lblUltPago.Size = new Size(91, 20);
-            lblUltPago.TabIndex = 9;
-            lblUltPago.Text = "Ultimo Pago";
-            // 
-            // txtMontoAbonado
-            // 
-            txtMontoAbonado.Location = new Point(129, 87);
-            txtMontoAbonado.Name = "txtMontoAbonado";
-            txtMontoAbonado.Size = new Size(125, 27);
-            txtMontoAbonado.TabIndex = 12;
-            // 
-            // lblMontoAbonado
-            // 
-            lblMontoAbonado.AutoSize = true;
-            lblMontoAbonado.Location = new Point(6, 87);
-            lblMontoAbonado.Name = "lblMontoAbonado";
-            lblMontoAbonado.Size = new Size(117, 20);
-            lblMontoAbonado.TabIndex = 11;
-            lblMontoAbonado.Text = "Monto abonado";
-            // 
-            // txtMetPago
-            // 
-            txtMetPago.Location = new Point(128, 133);
-            txtMetPago.Name = "txtMetPago";
-            txtMetPago.Size = new Size(125, 27);
-            txtMetPago.TabIndex = 14;
-            // 
-            // lblMetodPago
-            // 
-            lblMetodPago.AutoSize = true;
-            lblMetodPago.Location = new Point(6, 133);
-            lblMetodPago.Name = "lblMetodPago";
-            lblMetodPago.Size = new Size(116, 20);
-            lblMetodPago.TabIndex = 13;
-            lblMetodPago.Text = "Metodo d/pago";
-            // 
-            // lblFechaIngreso
-            // 
-            lblFechaIngreso.AutoSize = true;
-            lblFechaIngreso.Location = new Point(6, 180);
-            lblFechaIngreso.Name = "lblFechaIngreso";
-            lblFechaIngreso.Size = new Size(100, 20);
-            lblFechaIngreso.TabIndex = 15;
-            lblFechaIngreso.Text = "Fecha Ingreso";
-            // 
             // cmbSexo
             // 
             cmbSexo.FormattingEnabled = true;
-            cmbSexo.Items.AddRange(new object[] { "Hombre", "Mujer" });
-            cmbSexo.Location = new Point(76, 219);
+            cmbSexo.Location = new Point(460, 126);
             cmbSexo.Name = "cmbSexo";
-            cmbSexo.Size = new Size(165, 28);
+            cmbSexo.Size = new Size(67, 28);
             cmbSexo.TabIndex = 17;
             // 
             // lblFechaNac
             // 
             lblFechaNac.AutoSize = true;
-            lblFechaNac.Location = new Point(5, 185);
+            lblFechaNac.Location = new Point(413, 83);
             lblFechaNac.Name = "lblFechaNac";
             lblFechaNac.Size = new Size(101, 20);
             lblFechaNac.TabIndex = 18;
@@ -188,20 +129,15 @@
             // 
             // dtpFechaNac
             // 
-            dtpFechaNac.Location = new Point(109, 180);
+            dtpFechaNac.Location = new Point(517, 78);
             dtpFechaNac.Name = "dtpFechaNac";
             dtpFechaNac.Size = new Size(250, 27);
             dtpFechaNac.TabIndex = 19;
             // 
-            // dtpFechaIngreso
-            // 
-            dtpFechaIngreso.Location = new Point(128, 179);
-            dtpFechaIngreso.Name = "dtpFechaIngreso";
-            dtpFechaIngreso.Size = new Size(250, 27);
-            dtpFechaIngreso.TabIndex = 20;
-            // 
             // grbDatosPersonales
             // 
+            grbDatosPersonales.Controls.Add(dtpFechaIngreso);
+            grbDatosPersonales.Controls.Add(lblFechaIngreso);
             grbDatosPersonales.Controls.Add(lblNombre);
             grbDatosPersonales.Controls.Add(txtNombre);
             grbDatosPersonales.Controls.Add(dtpFechaNac);
@@ -214,34 +150,26 @@
             grbDatosPersonales.Controls.Add(lblSexo);
             grbDatosPersonales.Location = new Point(12, 12);
             grbDatosPersonales.Name = "grbDatosPersonales";
-            grbDatosPersonales.Size = new Size(386, 261);
+            grbDatosPersonales.Size = new Size(820, 178);
             grbDatosPersonales.TabIndex = 21;
             grbDatosPersonales.TabStop = false;
             grbDatosPersonales.Text = "Datos Personales";
             // 
-            // grbPagos
+            // dtpFechaIngreso
             // 
-            grbPagos.Controls.Add(dtpUltPago);
-            grbPagos.Controls.Add(lblUltPago);
-            grbPagos.Controls.Add(dtpFechaIngreso);
-            grbPagos.Controls.Add(lblMontoAbonado);
-            grbPagos.Controls.Add(lblFechaIngreso);
-            grbPagos.Controls.Add(txtMontoAbonado);
-            grbPagos.Controls.Add(txtMetPago);
-            grbPagos.Controls.Add(lblMetodPago);
-            grbPagos.Location = new Point(443, 12);
-            grbPagos.Name = "grbPagos";
-            grbPagos.Size = new Size(383, 261);
-            grbPagos.TabIndex = 22;
-            grbPagos.TabStop = false;
-            grbPagos.Text = "Pagos";
+            dtpFechaIngreso.Location = new Point(535, 40);
+            dtpFechaIngreso.Name = "dtpFechaIngreso";
+            dtpFechaIngreso.Size = new Size(250, 27);
+            dtpFechaIngreso.TabIndex = 22;
             // 
-            // dtpUltPago
+            // lblFechaIngreso
             // 
-            dtpUltPago.Location = new Point(129, 39);
-            dtpUltPago.Name = "dtpUltPago";
-            dtpUltPago.Size = new Size(250, 27);
-            dtpUltPago.TabIndex = 21;
+            lblFechaIngreso.AutoSize = true;
+            lblFechaIngreso.Location = new Point(413, 41);
+            lblFechaIngreso.Name = "lblFechaIngreso";
+            lblFechaIngreso.Size = new Size(100, 20);
+            lblFechaIngreso.TabIndex = 21;
+            lblFechaIngreso.Text = "Fecha Ingreso";
             // 
             // btnCrearUsuario
             // 
@@ -251,6 +179,7 @@
             btnCrearUsuario.TabIndex = 23;
             btnCrearUsuario.Text = "Crear Usuario";
             btnCrearUsuario.UseVisualStyleBackColor = true;
+            btnCrearUsuario.Click += btnCrearUsuario_Click;
             // 
             // btnModificarUsuario
             // 
@@ -260,6 +189,7 @@
             btnModificarUsuario.TabIndex = 24;
             btnModificarUsuario.Text = "Modificar Usuario";
             btnModificarUsuario.UseVisualStyleBackColor = true;
+            btnModificarUsuario.Click += btnModificarUsuario_Click;
             // 
             // grbListaClientes
             // 
@@ -268,10 +198,10 @@
             grbListaClientes.Controls.Add(btnBuscarDni);
             grbListaClientes.Controls.Add(btnCrearUsuario);
             grbListaClientes.Controls.Add(dgvClientes);
-            grbListaClientes.Controls.Add(textBox4);
-            grbListaClientes.Location = new Point(12, 279);
+            grbListaClientes.Controls.Add(txtBuscarClientes);
+            grbListaClientes.Location = new Point(12, 196);
             grbListaClientes.Name = "grbListaClientes";
-            grbListaClientes.Size = new Size(842, 294);
+            grbListaClientes.Size = new Size(842, 377);
             grbListaClientes.TabIndex = 25;
             grbListaClientes.TabStop = false;
             grbListaClientes.Text = "Lista de Clientes";
@@ -302,15 +232,16 @@
             dgvClientes.Name = "dgvClientes";
             dgvClientes.RowHeadersWidth = 51;
             dgvClientes.RowTemplate.Height = 29;
-            dgvClientes.Size = new Size(831, 228);
+            dgvClientes.Size = new Size(831, 311);
             dgvClientes.TabIndex = 7;
+            dgvClientes.CellContentClick += dgvClientes_CellClick;
             // 
-            // textBox4
+            // txtBuscarClientes
             // 
-            textBox4.Location = new Point(200, 25);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(166, 27);
-            textBox4.TabIndex = 12;
+            txtBuscarClientes.Location = new Point(200, 25);
+            txtBuscarClientes.Name = "txtBuscarClientes";
+            txtBuscarClientes.Size = new Size(166, 27);
+            txtBuscarClientes.TabIndex = 12;
             // 
             // frmClientes
             // 
@@ -318,7 +249,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(866, 585);
             Controls.Add(grbListaClientes);
-            Controls.Add(grbPagos);
             Controls.Add(grbDatosPersonales);
             Name = "frmClientes";
             StartPosition = FormStartPosition.CenterScreen;
@@ -326,8 +256,6 @@
             Load += frmClientes_Load;
             grbDatosPersonales.ResumeLayout(false);
             grbDatosPersonales.PerformLayout();
-            grbPagos.ResumeLayout(false);
-            grbPagos.PerformLayout();
             grbListaClientes.ResumeLayout(false);
             grbListaClientes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
@@ -343,25 +271,18 @@
         private TextBox txtDni;
         private Label lblDni;
         private Label lblSexo;
-        private Label lblUltPago;
-        private TextBox txtMontoAbonado;
-        private Label lblMontoAbonado;
-        private TextBox txtMetPago;
-        private Label lblMetodPago;
-        private Label lblFechaIngreso;
         private ComboBox cmbSexo;
         private Label lblFechaNac;
         private DateTimePicker dtpFechaNac;
-        private DateTimePicker dtpFechaIngreso;
         private GroupBox grbDatosPersonales;
-        private GroupBox grbPagos;
-        private DateTimePicker dtpUltPago;
         private Button btnCrearUsuario;
         private Button btnModificarUsuario;
         private GroupBox grbListaClientes;
         private ComboBox cmbFiltrado;
         private Button btnBuscarDni;
         private DataGridView dgvClientes;
-        private TextBox textBox4;
+        private TextBox txtBuscarClientes;
+        private DateTimePicker dtpFechaIngreso;
+        private Label lblFechaIngreso;
     }
 }

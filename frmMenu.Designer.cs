@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            dgvClientes = new DataGridView();
             btnAbrirPuerta = new Button();
             btnAbrirPuerta1min = new Button();
             btnSalir = new Button();
@@ -42,16 +43,26 @@
             txtMonto = new TextBox();
             txtDniAbono = new TextBox();
             btnCargarPago = new Button();
-            dgvClientes = new DataGridView();
             txtBusqueda = new TextBox();
             grbListaClientes = new GroupBox();
             cmbFiltrado = new ComboBox();
-            btnBuscarDni = new Button();
+            btnBuscar = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             grbClientes.SuspendLayout();
             grbClientesPago.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             grbListaClientes.SuspendLayout();
             SuspendLayout();
+            // 
+            // dgvClientes
+            // 
+            dgvClientes.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvClientes.Location = new Point(9, 60);
+            dgvClientes.Name = "dgvClientes";
+            dgvClientes.RowHeadersWidth = 51;
+            dgvClientes.RowTemplate.Height = 29;
+            dgvClientes.Size = new Size(767, 265);
+            dgvClientes.TabIndex = 7;
             // 
             // btnAbrirPuerta
             // 
@@ -196,27 +207,18 @@
             btnCargarPago.UseVisualStyleBackColor = true;
             btnCargarPago.Click += btnCargarPago_Click;
             // 
-            // dgvClientes
-            // 
-            dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientes.Location = new Point(9, 60);
-            dgvClientes.Name = "dgvClientes";
-            dgvClientes.RowHeadersWidth = 51;
-            dgvClientes.RowTemplate.Height = 29;
-            dgvClientes.Size = new Size(767, 265);
-            dgvClientes.TabIndex = 7;
-            // 
             // txtBusqueda
             // 
             txtBusqueda.Location = new Point(200, 25);
             txtBusqueda.Name = "txtBusqueda";
             txtBusqueda.Size = new Size(166, 27);
             txtBusqueda.TabIndex = 12;
+            txtBusqueda.TextChanged += txtBusqueda_TextChanged;
             // 
             // grbListaClientes
             // 
             grbListaClientes.Controls.Add(cmbFiltrado);
-            grbListaClientes.Controls.Add(btnBuscarDni);
+            grbListaClientes.Controls.Add(btnBuscar);
             grbListaClientes.Controls.Add(dgvClientes);
             grbListaClientes.Controls.Add(txtBusqueda);
             grbListaClientes.Location = new Point(3, 223);
@@ -224,26 +226,27 @@
             grbListaClientes.Size = new Size(795, 338);
             grbListaClientes.TabIndex = 14;
             grbListaClientes.TabStop = false;
-            grbListaClientes.Text = "Lista de Clientes";
+            grbListaClientes.Text = "Lista de Pagos";
             // 
             // cmbFiltrado
             // 
             cmbFiltrado.FormattingEnabled = true;
-            cmbFiltrado.Items.AddRange(new object[] { "DNI", "Nombre" });
             cmbFiltrado.Location = new Point(9, 25);
             cmbFiltrado.Name = "cmbFiltrado";
             cmbFiltrado.Size = new Size(185, 28);
             cmbFiltrado.TabIndex = 14;
             cmbFiltrado.Text = "Buscar por..";
+            cmbFiltrado.SelectedIndexChanged += cmbFiltrado_SelectedIndexChanged;
             // 
-            // btnBuscarDni
+            // btnBuscar
             // 
-            btnBuscarDni.Location = new Point(372, 24);
-            btnBuscarDni.Name = "btnBuscarDni";
-            btnBuscarDni.Size = new Size(113, 29);
-            btnBuscarDni.TabIndex = 6;
-            btnBuscarDni.Text = "Buscar";
-            btnBuscarDni.UseVisualStyleBackColor = true;
+            btnBuscar.Location = new Point(372, 24);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Size = new Size(113, 29);
+            btnBuscar.TabIndex = 6;
+            btnBuscar.Text = "Buscar";
+            btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += btnBuscar_Click;
             // 
             // frmMenu
             // 
@@ -260,10 +263,10 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Menu";
             Load += frmMenu_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
             grbClientes.ResumeLayout(false);
             grbClientesPago.ResumeLayout(false);
             grbClientesPago.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
             grbListaClientes.ResumeLayout(false);
             grbListaClientes.PerformLayout();
             ResumeLayout(false);
@@ -288,7 +291,7 @@
         private DataGridView dgvClientes;
         private TextBox txtBusqueda;
         private GroupBox grbListaClientes;
-        private Button btnBuscarDni;
+        private Button btnBuscar;
         private ComboBox cmbFiltrado;
     }
 }

@@ -18,7 +18,12 @@ namespace pryAccesoGym
         public frmMenu()
         {
             InitializeComponent();
+            cmbFiltrado.Items.Add("DNI");
+            cmbFiltrado.Items.Add("Nombre");
+            cmbFiltrado.SelectedIndex = 0; 
             CargarPagos();
+            dgvClientes.RowHeadersVisible = false;
+
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -165,6 +170,93 @@ namespace pryAccesoGym
             txtMonto.Text = "";
             rbtEfectivo.Checked = false;
             rbtTransferencia.Checked = false;
+        }
+
+        private void cmbFiltrado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            // Validar que haya un criterio seleccionado y texto ingresado
+            if (cmbFiltrado.SelectedItem == null || string.IsNullOrWhiteSpace(txtBusqueda.Text))
+            {
+                MessageBox.Show("Por favor, seleccione un criterio y escriba algo para buscar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // Obtener el criterio de filtrado y el texto ingresado
+                string criterio = cmbFiltrado.SelectedItem.ToString();
+                string textoBusqueda = txtBusqueda.Text.Trim();
+
+                // Definir la consulta dinámica según el criterio
+                string query = @"
+            SELECT 
+                p.DNI AS 'Documento', 
+                c.Nombre AS 'Nombre', 
+                c.Apellido AS 'Apellido', 
+                p.Monto AS 'Monto Pagado', 
+                p.MetodoPago AS 'Método de Pago', 
+                p.FechaPago AS 'Fecha de Pago' 
+            FROM 
+                Pagos p
+            JOIN 
+                Clientes c 
+            ON 
+                p.DNI = c.DNI
+            WHERE ";
+
+                // Ajustar el filtro según el criterio seleccionado
+                SqlParameter[] parametros;
+                if (criterio == "DNI")
+                {
+                    query += "p.DNI LIKE @Busqueda";
+                    parametros = new SqlParameter[]
+                    {
+                new SqlParameter("@Busqueda", "%" + textoBusqueda + "%")
+                    };
+                }
+                else if (criterio == "Nombre")
+                {
+                    query += "c.Nombre LIKE @Busqueda";
+                    parametros = new SqlParameter[]
+                    {
+                new SqlParameter("@Busqueda", "%" + textoBusqueda + "%")
+                    };
+                }
+                else
+                {
+                    MessageBox.Show("Criterio de búsqueda no válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                query += " ORDER BY p.FechaPago DESC";
+
+                // Ejecutar la consulta con los parámetros y mostrar los resultados
+                DataTable dataTable = DatabaseHelper.ExecuteQuery(query, parametros);
+
+                // Verificar si hay resultados antes de mostrar en el DataGridView
+                if (dataTable.Rows.Count > 0)
+                {
+                    dgvClientes.DataSource = dataTable;
+                }
+                else
+                {
+                    MessageBox.Show("No se encontraron resultados para la búsqueda.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dgvClientes.DataSource = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al realizar la búsqueda: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

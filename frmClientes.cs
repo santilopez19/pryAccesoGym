@@ -1,16 +1,11 @@
 ﻿using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Data;
-    using System.Drawing;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Windows.Forms;
+using System.Data;
+using System.Windows.Forms;
+using Microsoft.Data.SqlClient;
 using static pryAccesoGym.bdGimnasio;
 
-    namespace pryAccesoGym
-    {
+namespace pryAccesoGym
+{
     public partial class frmClientes : Form
     {
         public frmClientes()
@@ -19,12 +14,9 @@ using static pryAccesoGym.bdGimnasio;
             this.KeyPreview = true;
             this.KeyDown += VolverPagina_KeyDown;
             CargarClientes();
+            dgvClientes.RowHeadersVisible = false;
         }
 
-        private void frmClientes_Load(object sender, EventArgs e)
-        {
-
-        }
         private void VolverPagina_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -34,19 +26,134 @@ using static pryAccesoGym.bdGimnasio;
                 this.Hide();
             }
         }
+
         private void CargarClientes()
         {
             try
             {
-                string query = "USE dbGimnasio; SELECT DNI, Nombre, Apellido, FechaNacimiento, Sexo, FechaIngreso, FechaPago, MontoPagado, MetodoPago FROM Clientes";
+                string query = "SELECT * FROM Clientes ORDER BY Nombre ASC";
                 DataTable dataTable = DatabaseHelper.ExecuteQuery(query);
                 dgvClientes.DataSource = dataTable;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al cargar los clientes: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnCrearUsuario_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Validar que los campos obligatorios no estén vacíos
+                if (string.IsNullOrWhiteSpace(txtDni.Text) || string.IsNullOrWhiteSpace(txtNombre.Text) ||
+                    string.IsNullOrWhiteSpace(txtApellido.Text) || cmbSexo.SelectedItem == null)
+                {
+                    MessageBox.Show("Por favor, complete todos los campos obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Insertar el nuevo cliente
+                string query = @"
+        INSERT INTO Clientes (DNI, Nombre, Apellido, FechaNacimiento, Sexo, FechaIngreso)
+        VALUES (@DNI, @Nombre, @Apellido, @FechaNacimiento, @Sexo, @FechaIngreso)";
+
+                SqlParameter[] parameters = new SqlParameter[]
+                {
+            new SqlParameter("@DNI", txtDni.Text.Trim()),
+            new SqlParameter("@Nombre", txtNombre.Text.Trim()),
+            new SqlParameter("@Apellido", txtApellido.Text.Trim()),
+            new SqlParameter("@FechaNacimiento", dtpFechaNac.Value),
+            new SqlParameter("@Sexo", cmbSexo.SelectedItem.ToString()),
+            new SqlParameter("@FechaIngreso", dtpFechaIngreso.Value)
+                };
+
+                DatabaseHelper.ExecuteNonQuery(query, parameters);
+
+                MessageBox.Show("Cliente creado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CargarClientes(); // Actualizar la grilla
+                LimpiarCampos();  // Limpiar los campos
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al crear el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvClientes.Rows[e.RowIndex];
+
+                txtDni.Text = row.Cells["DNI"].Value?.ToString() ?? "";
+                txtNombre.Text = row.Cells["Nombre"].Value?.ToString() ?? "";
+                txtApellido.Text = row.Cells["Apellido"].Value?.ToString() ?? "";
+                dtpFechaNac.Value = row.Cells["FechaNacimiento"].Value != DBNull.Value ? Convert.ToDateTime(row.Cells["FechaNacimiento"].Value) : DateTime.Now;
+                cmbSexo.SelectedItem = row.Cells["Sexo"].Value?.ToString() ?? "";
+                dtpFechaIngreso.Value = row.Cells["FechaIngreso"].Value != DBNull.Value ? Convert.ToDateTime(row.Cells["FechaIngreso"].Value) : DateTime.Now;
+            }
+        }
+
+        private void LimpiarCampos()
+        {
+            txtDni.Clear();
+            txtNombre.Clear();
+            txtApellido.Clear();
+            dtpFechaNac.Value = DateTime.Now;
+            cmbSexo.SelectedIndex = -1;
+            dtpFechaIngreso.Value = DateTime.Now;
+        }
+
+        private void frmClientes_Load(object sender, EventArgs e)
+        {
+            cmbSexo.Items.Clear();
+            cmbSexo.Items.Add("M"); // Masculino
+            cmbSexo.Items.Add("F"); // Femenino
+            cmbSexo.SelectedIndex = -1;
+        }
+
+        private void btnModificarUsuario_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Validar que los campos obligatorios no estén vacíos
+                if (string.IsNullOrWhiteSpace(txtDni.Text) || string.IsNullOrWhiteSpace(txtNombre.Text) ||
+                    string.IsNullOrWhiteSpace(txtApellido.Text) || cmbSexo.SelectedItem == null)
+                {
+                    MessageBox.Show("Por favor, complete todos los campos obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Actualizar los datos del cliente
+                string query = @"
+    UPDATE Clientes 
+    SET Nombre = @Nombre, Apellido = @Apellido, FechaNacimiento = @FechaNacimiento, 
+        Sexo = @Sexo, FechaIngreso = @FechaIngreso
+    WHERE DNI = @DNI";
+
+                SqlParameter[] parameters = new SqlParameter[]
+                {
+        new SqlParameter("@DNI", txtDni.Text.Trim()),
+        new SqlParameter("@Nombre", txtNombre.Text.Trim()),
+        new SqlParameter("@Apellido", txtApellido.Text.Trim()),
+        new SqlParameter("@FechaNacimiento", dtpFechaNac.Value),
+        new SqlParameter("@Sexo", cmbSexo.SelectedItem.ToString()),
+        new SqlParameter("@FechaIngreso", dtpFechaIngreso.Value)
+                };
+
+                DatabaseHelper.ExecuteNonQuery(query, parameters);
+
+                MessageBox.Show("Cliente modificado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CargarClientes(); // Actualizar la grilla
+                LimpiarCampos();  // Limpiar los campos
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al modificar el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+
         }
     }
 }
-
