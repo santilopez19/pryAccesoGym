@@ -138,6 +138,7 @@
             rbtEfectivo.TabStop = true;
             rbtEfectivo.Text = "Efectivo";
             rbtEfectivo.UseVisualStyleBackColor = true;
+            rbtEfectivo.CheckedChanged += rbtEfectivo_CheckedChanged;
             // 
             // rbtTransferencia
             // 
@@ -149,6 +150,7 @@
             rbtTransferencia.TabStop = true;
             rbtTransferencia.Text = "Transferencia";
             rbtTransferencia.UseVisualStyleBackColor = true;
+            rbtTransferencia.CheckedChanged += rbtTransferencia_CheckedChanged;
             // 
             // lblMontoPago
             // 
@@ -174,6 +176,7 @@
             txtMonto.Name = "txtMonto";
             txtMonto.Size = new Size(166, 27);
             txtMonto.TabIndex = 7;
+            txtMonto.TextChanged += txtMonto_TextChanged;
             // 
             // txtDniAbono
             // 
@@ -181,6 +184,7 @@
             txtDniAbono.Name = "txtDniAbono";
             txtDniAbono.Size = new Size(166, 27);
             txtDniAbono.TabIndex = 6;
+            txtDniAbono.TextChanged += txtDniAbono_TextChanged;
             // 
             // btnCargarPago
             // 
@@ -190,6 +194,7 @@
             btnCargarPago.TabIndex = 5;
             btnCargarPago.Text = "Cargar Pago";
             btnCargarPago.UseVisualStyleBackColor = true;
+            btnCargarPago.Click += btnCargarPago_Click;
             // 
             // dgvClientes
             // 
