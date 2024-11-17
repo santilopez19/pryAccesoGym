@@ -63,69 +63,71 @@ namespace pryAccesoGym
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(txtDniIngreso.Text))
+                string dni = txtDniIngreso.Text.Trim();
+
+                // Validar que el DNI no esté vacío
+                if (string.IsNullOrWhiteSpace(dni))
                 {
                     lblAvisoIngreso.Text = "Por favor, ingrese un DNI válido.";
                     lblAvisoIngreso.ForeColor = Color.Red;
-                    IniciarTemporizador();
                     return;
                 }
 
-                string dni = txtDniIngreso.Text.Trim();
-
-                string query = @"
-            SELECT TOP 1 FechaPago 
-            FROM Pagos 
-            WHERE DNI = @DNI
-            ORDER BY FechaPago DESC";
-
-                SqlParameter[] parameters = new SqlParameter[]
+                // Validar si el cliente está registrado en la base de datos
+                string clienteQuery = "SELECT COUNT(*) FROM Clientes WHERE DNI = @DNI";
+                int clienteExistente = Convert.ToInt32(DatabaseHelper.ExecuteScalar(clienteQuery, new SqlParameter[]
                 {
-            new SqlParameter("@DNI", dni)
-                };
+                    new SqlParameter("@DNI", dni)
+                }));
 
-                object result = DatabaseHelper.ExecuteScalar(query, parameters);
-
-                if (result == null || result == DBNull.Value)
+                if (clienteExistente == 0)
                 {
-                    lblAvisoIngreso.Text = "El cliente no tiene registros de pago.";
+                    lblAvisoIngreso.Text = "El DNI no está registrado en el sistema.";
                     lblAvisoIngreso.ForeColor = Color.Red;
-                    IniciarTemporizador();
                     return;
                 }
 
-                DateTime fechaPago = Convert.ToDateTime(result);
-                DateTime fechaActual = DateTime.Now;
-                TimeSpan diferencia = fechaActual - fechaPago;
+                // Consultar la fecha del último pago del cliente
+                string pagoQuery = @"
+                    SELECT TOP 1 FechaPago 
+                    FROM Pagos 
+                    WHERE DNI = @DNI 
+                    ORDER BY FechaPago DESC";
+
+                object fechaPagoObj = DatabaseHelper.ExecuteScalar(pagoQuery, new SqlParameter[]
+                {
+                    new SqlParameter("@DNI", dni)
+                });
+
+                // Verificar si no se encontró ningún pago
+                if (fechaPagoObj == null || fechaPagoObj == DBNull.Value)
+                {
+                    lblAvisoIngreso.Text = "No se encontraron pagos registrados para este cliente.";
+                    lblAvisoIngreso.ForeColor = Color.Red;
+                    return;
+                }
+
+                DateTime fechaPago = Convert.ToDateTime(fechaPagoObj);
+
+                // Calcular la diferencia de días entre hoy y la fecha del último pago
+                TimeSpan diferencia = DateTime.Now - fechaPago;
 
                 if (diferencia.TotalDays <= 30)
                 {
-                    lblAvisoIngreso.Text = "Ingreso permitido. Cuota al día.";
+                    lblAvisoIngreso.Text = "El cliente está habilitado para ingresar.";
                     lblAvisoIngreso.ForeColor = Color.Green;
-                }
-                else if (diferencia.TotalDays > 30 && diferencia.TotalDays <= 35)
-                {
-                    lblAvisoIngreso.Text = $"Cuota vencida desde el {fechaPago:dd/MM/yyyy}.";
-                    lblAvisoIngreso.ForeColor = Color.Orange;
+
+                    // Aquí puedes agregar lógica para abrir la cerradura, si es necesario
                 }
                 else
                 {
-                    lblAvisoIngreso.Text = "Acceso denegado. Cuota vencida.";
+                    lblAvisoIngreso.Text = "El cliente no tiene el abono al día.";
                     lblAvisoIngreso.ForeColor = Color.Red;
                 }
-
-                IniciarTemporizador();
             }
             catch (Exception ex)
             {
-                lblAvisoIngreso.Text = "Error al validar el ingreso.";
-                lblAvisoIngreso.ForeColor = Color.Red;
-                IniciarTemporizador();
-            }
-            finally
-            {
-                txtDniIngreso.Text = "";
-                txtDniIngreso.Focus();
+                MessageBox.Show("Ocurrió un error al verificar el ingreso: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void txtDniIngreso_TextChanged(object sender, EventArgs e)
