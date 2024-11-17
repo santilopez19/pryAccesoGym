@@ -28,7 +28,7 @@ namespace pryAccesoGym
         {
             if (e.KeyCode == Keys.Enter)
             {
-                btnIngresar.PerformClick(); 
+                btnIngresar.PerformClick();
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
@@ -55,7 +55,7 @@ namespace pryAccesoGym
         }
         private void IniciarTemporizador()
         {
-            tLbl.Stop(); 
+            tLbl.Stop();
             tLbl.Start();
         }
 
@@ -74,35 +74,38 @@ namespace pryAccesoGym
                 }
 
                 // Validar si el cliente está registrado en la base de datos
-                string clienteQuery = "SELECT COUNT(*) FROM Clientes WHERE DNI = @DNI";
-                int clienteExistente = Convert.ToInt32(DatabaseHelper.ExecuteScalar(clienteQuery, new SqlParameter[]
+                string clienteQuery = "SELECT Nombre FROM Clientes WHERE DNI = @DNI";
+                object nombreClienteObj = DatabaseHelper.ExecuteScalar(clienteQuery, new SqlParameter[]
                 {
-                    new SqlParameter("@DNI", dni)
-                }));
+            new SqlParameter("@DNI", dni)
+                });
 
-                if (clienteExistente == 0)
+                // Verificar si el cliente no existe
+                if (nombreClienteObj == null || nombreClienteObj == DBNull.Value)
                 {
                     lblAvisoIngreso.Text = "El DNI no está registrado en el sistema.";
                     lblAvisoIngreso.ForeColor = Color.Red;
                     return;
                 }
 
+                string nombreCliente = nombreClienteObj.ToString();
+
                 // Consultar la fecha del último pago del cliente
                 string pagoQuery = @"
-                    SELECT TOP 1 FechaPago 
-                    FROM Pagos 
-                    WHERE DNI = @DNI 
-                    ORDER BY FechaPago DESC";
+            SELECT TOP 1 FechaPago 
+            FROM Pagos 
+            WHERE DNI = @DNI 
+            ORDER BY FechaPago DESC";
 
                 object fechaPagoObj = DatabaseHelper.ExecuteScalar(pagoQuery, new SqlParameter[]
                 {
-                    new SqlParameter("@DNI", dni)
+            new SqlParameter("@DNI", dni)
                 });
 
                 // Verificar si no se encontró ningún pago
                 if (fechaPagoObj == null || fechaPagoObj == DBNull.Value)
                 {
-                    lblAvisoIngreso.Text = "No se encontraron pagos registrados para este cliente.";
+                    lblAvisoIngreso.Text = $"No se encontraron pagos registrados para {nombreCliente}.";
                     lblAvisoIngreso.ForeColor = Color.Red;
                     return;
                 }
@@ -114,14 +117,20 @@ namespace pryAccesoGym
 
                 if (diferencia.TotalDays <= 30)
                 {
-                    lblAvisoIngreso.Text = "El cliente está habilitado para ingresar.";
+                    lblAvisoIngreso.Text = $"{nombreCliente} está habilitado para ingresar.";
                     lblAvisoIngreso.ForeColor = Color.Green;
 
                     // Aquí puedes agregar lógica para abrir la cerradura, si es necesario
                 }
+
+                else if (diferencia.TotalDays > 30 && diferencia.TotalDays <= 35)
+                {
+                    lblAvisoIngreso.Text = $"{nombreCliente} su cuota esta vencida desde el {fechaPago:dd/MM/yyyy}.";
+                    lblAvisoIngreso.ForeColor = Color.Orange;
+                }
                 else
                 {
-                    lblAvisoIngreso.Text = "El cliente no tiene el abono al día.";
+                    lblAvisoIngreso.Text = $"{nombreCliente} no tiene el abono al día.";
                     lblAvisoIngreso.ForeColor = Color.Red;
                 }
             }
@@ -129,7 +138,9 @@ namespace pryAccesoGym
             {
                 MessageBox.Show("Ocurrió un error al verificar el ingreso: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            txtDniIngreso.Text = "";
         }
+
         private void txtDniIngreso_TextChanged(object sender, EventArgs e)
         {
 
@@ -140,6 +151,11 @@ namespace pryAccesoGym
             tLbl.Stop();
 
             lblAvisoIngreso.Text = "";
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

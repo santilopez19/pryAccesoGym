@@ -13,7 +13,7 @@ namespace pryAccesoGym
 
             public static object ExecuteScalar(string query, SqlParameter[] parameters)
             {
-                using (SqlConnection connection = new SqlConnection("tu_cadena_de_conexion"))
+                using (SqlConnection connection = new SqlConnection(connectionString)) // Cambiado a connectionString
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -23,6 +23,7 @@ namespace pryAccesoGym
                     }
                 }
             }
+
             public static DataTable ExecuteQuery(string query, SqlParameter[] parameters = null)
             {
                 DataTable dataTable = new DataTable();

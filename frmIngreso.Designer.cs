@@ -38,7 +38,7 @@
             // 
             // btnIngresar
             // 
-            btnIngresar.Location = new Point(332, 214);
+            btnIngresar.Location = new Point(321, 204);
             btnIngresar.Name = "btnIngresar";
             btnIngresar.Size = new Size(160, 39);
             btnIngresar.TabIndex = 0;
@@ -48,7 +48,7 @@
             // 
             // txtDniIngreso
             // 
-            txtDniIngreso.Location = new Point(320, 172);
+            txtDniIngreso.Location = new Point(308, 157);
             txtDniIngreso.Name = "txtDniIngreso";
             txtDniIngreso.Size = new Size(187, 27);
             txtDniIngreso.TabIndex = 1;
@@ -57,11 +57,12 @@
             // 
             // lblAvisoIngreso
             // 
-            lblAvisoIngreso.AutoSize = true;
-            lblAvisoIngreso.Location = new Point(320, 293);
+            lblAvisoIngreso.Font = new Font("Arial Rounded MT Bold", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            lblAvisoIngreso.Location = new Point(104, 255);
             lblAvisoIngreso.Name = "lblAvisoIngreso";
-            lblAvisoIngreso.Size = new Size(0, 20);
+            lblAvisoIngreso.Size = new Size(595, 94);
             lblAvisoIngreso.TabIndex = 2;
+            lblAvisoIngreso.TextAlign = ContentAlignment.MiddleCenter;
             lblAvisoIngreso.Click += lblAvisoIngreso_Click;
             // 
             // tLbl
@@ -73,7 +74,7 @@
             // 
             lblDniIngrese.AutoSize = true;
             lblDniIngrese.Font = new Font("Arial Narrow", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            lblDniIngrese.Location = new Point(311, 127);
+            lblDniIngrese.Location = new Point(297, 106);
             lblDniIngrese.Name = "lblDniIngrese";
             lblDniIngrese.Size = new Size(208, 33);
             lblDniIngrese.TabIndex = 3;
@@ -84,10 +85,10 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(lblDniIngrese);
             Controls.Add(lblAvisoIngreso);
-            Controls.Add(txtDniIngreso);
+            Controls.Add(lblDniIngrese);
             Controls.Add(btnIngresar);
+            Controls.Add(txtDniIngreso);
             Name = "frmIngreso";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ingreso";

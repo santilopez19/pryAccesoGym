@@ -80,6 +80,9 @@ namespace pryAccesoGym
             {
                 MessageBox.Show("Error al crear el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            CargarClientes();
+            LimpiarCampos();
         }
 
         private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -190,6 +193,7 @@ namespace pryAccesoGym
                         {
                             MessageBox.Show("Cliente eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             CargarClientes(); // Actualizar la lista después de eliminar
+                            LimpiarCampos();
                         }
                         else
                         {
