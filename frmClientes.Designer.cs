@@ -45,7 +45,6 @@
             btnModificarUsuario = new Button();
             grbListaClientes = new GroupBox();
             btnEliminar = new Button();
-            cmbFiltrado = new ComboBox();
             btnBuscarDni = new Button();
             dgvClientes = new DataGridView();
             txtBuscarClientes = new TextBox();
@@ -174,7 +173,7 @@
             // 
             // btnCrearUsuario
             // 
-            btnCrearUsuario.Location = new Point(647, 23);
+            btnCrearUsuario.Location = new Point(535, 23);
             btnCrearUsuario.Name = "btnCrearUsuario";
             btnCrearUsuario.Size = new Size(115, 29);
             btnCrearUsuario.TabIndex = 23;
@@ -184,7 +183,7 @@
             // 
             // btnModificarUsuario
             // 
-            btnModificarUsuario.Location = new Point(768, 23);
+            btnModificarUsuario.Location = new Point(656, 23);
             btnModificarUsuario.Name = "btnModificarUsuario";
             btnModificarUsuario.Size = new Size(141, 29);
             btnModificarUsuario.TabIndex = 24;
@@ -195,7 +194,6 @@
             // grbListaClientes
             // 
             grbListaClientes.Controls.Add(btnEliminar);
-            grbListaClientes.Controls.Add(cmbFiltrado);
             grbListaClientes.Controls.Add(btnModificarUsuario);
             grbListaClientes.Controls.Add(btnBuscarDni);
             grbListaClientes.Controls.Add(btnCrearUsuario);
@@ -203,14 +201,14 @@
             grbListaClientes.Controls.Add(txtBuscarClientes);
             grbListaClientes.Location = new Point(12, 196);
             grbListaClientes.Name = "grbListaClientes";
-            grbListaClientes.Size = new Size(1087, 377);
+            grbListaClientes.Size = new Size(986, 377);
             grbListaClientes.TabIndex = 25;
             grbListaClientes.TabStop = false;
             grbListaClientes.Text = "Lista de Clientes";
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(935, 23);
+            btnEliminar.Location = new Point(823, 23);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(146, 29);
             btnEliminar.TabIndex = 25;
@@ -218,24 +216,15 @@
             btnEliminar.UseVisualStyleBackColor = true;
             btnEliminar.Click += btnEliminar_Click;
             // 
-            // cmbFiltrado
-            // 
-            cmbFiltrado.FormattingEnabled = true;
-            cmbFiltrado.Items.AddRange(new object[] { "DNI", "Nombre" });
-            cmbFiltrado.Location = new Point(9, 25);
-            cmbFiltrado.Name = "cmbFiltrado";
-            cmbFiltrado.Size = new Size(185, 28);
-            cmbFiltrado.TabIndex = 14;
-            cmbFiltrado.Text = "Buscar por..";
-            // 
             // btnBuscarDni
             // 
-            btnBuscarDni.Location = new Point(372, 24);
+            btnBuscarDni.Location = new Point(181, 23);
             btnBuscarDni.Name = "btnBuscarDni";
             btnBuscarDni.Size = new Size(113, 29);
             btnBuscarDni.TabIndex = 6;
             btnBuscarDni.Text = "Buscar";
             btnBuscarDni.UseVisualStyleBackColor = true;
+            btnBuscarDni.Click += btnBuscarDni_Click;
             // 
             // dgvClientes
             // 
@@ -245,23 +234,24 @@
             dgvClientes.Name = "dgvClientes";
             dgvClientes.RowHeadersWidth = 51;
             dgvClientes.RowTemplate.Height = 29;
-            dgvClientes.Size = new Size(1076, 311);
+            dgvClientes.Size = new Size(971, 311);
             dgvClientes.TabIndex = 7;
             dgvClientes.CellClick += dgvClientes_CellClick;
             dgvClientes.CellContentClick += dgvClientes_CellClick;
             // 
             // txtBuscarClientes
             // 
-            txtBuscarClientes.Location = new Point(200, 25);
+            txtBuscarClientes.Location = new Point(9, 23);
             txtBuscarClientes.Name = "txtBuscarClientes";
             txtBuscarClientes.Size = new Size(166, 27);
             txtBuscarClientes.TabIndex = 12;
+            txtBuscarClientes.TextChanged += txtBuscarClientes_TextChanged;
             // 
             // frmClientes
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1111, 585);
+            ClientSize = new Size(1010, 585);
             Controls.Add(grbListaClientes);
             Controls.Add(grbDatosPersonales);
             Name = "frmClientes";
@@ -292,7 +282,6 @@
         private Button btnCrearUsuario;
         private Button btnModificarUsuario;
         private GroupBox grbListaClientes;
-        private ComboBox cmbFiltrado;
         private Button btnBuscarDni;
         private DataGridView dgvClientes;
         private TextBox txtBuscarClientes;

@@ -182,22 +182,30 @@ namespace pryAccesoGym
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            // Validar que haya un criterio seleccionado y texto ingresado
-            if (cmbFiltrado.SelectedItem == null || string.IsNullOrWhiteSpace(txtBusqueda.Text))
-            {
-                MessageBox.Show("Por favor, seleccione un criterio y escriba algo para buscar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             try
             {
+                // Si el campo de búsqueda está vacío, cargar todos los pagos
+                if (string.IsNullOrWhiteSpace(txtBusqueda.Text))
+                {
+                    CargarPagos();
+                    return;
+                }
+
                 // Obtener el criterio de filtrado y el texto ingresado
-                string criterio = cmbFiltrado.SelectedItem.ToString();
+                string criterio = cmbFiltrado.SelectedItem?.ToString();
                 string textoBusqueda = txtBusqueda.Text.Trim();
+
+                // Validar que haya un criterio seleccionado
+                if (string.IsNullOrEmpty(criterio))
+                {
+                    MessageBox.Show("Por favor, seleccione un criterio de búsqueda.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 // Definir la consulta dinámica según el criterio
                 string query = @"
             SELECT 
+                p.PagoID AS 'PagoID',
                 p.DNI AS 'Documento', 
                 c.Nombre AS 'Nombre', 
                 c.Apellido AS 'Apellido', 
@@ -212,8 +220,9 @@ namespace pryAccesoGym
                 p.DNI = c.DNI
             WHERE ";
 
-                // Ajustar el filtro según el criterio seleccionado
                 SqlParameter[] parametros;
+
+                // Ajustar el filtro según el criterio seleccionado
                 if (criterio == "DNI")
                 {
                     query += "p.DNI LIKE @Busqueda";
@@ -257,6 +266,7 @@ namespace pryAccesoGym
                 MessageBox.Show("Error al realizar la búsqueda: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -327,6 +337,9 @@ namespace pryAccesoGym
                 {
                     // Obtener el PagoID del registro seleccionado
                     int pagoID = Convert.ToInt32(dgvClientes.CurrentRow.Cells["PagoID"].Value);
+
+                    // Obtener los valores ingresados por el usuario
+                    string nuevoDni = txtDniAbono.Text.Trim();
                     string montoTexto = txtMonto.Text.Trim();
                     decimal monto;
 
@@ -334,6 +347,26 @@ namespace pryAccesoGym
                     if (!decimal.TryParse(montoTexto, out monto))
                     {
                         MessageBox.Show("El monto ingresado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    // Validar que el nuevo DNI no esté vacío
+                    if (string.IsNullOrWhiteSpace(nuevoDni))
+                    {
+                        MessageBox.Show("El campo DNI no puede estar vacío.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Validar que el nuevo DNI exista en la tabla Clientes
+                    string validacionDniQuery = "SELECT COUNT(*) FROM Clientes WHERE DNI = @DNI";
+                    int existeDni = (int)DatabaseHelper.ExecuteScalar(validacionDniQuery, new SqlParameter[]
+                    {
+                new SqlParameter("@DNI", nuevoDni)
+                    });
+
+                    if (existeDni == 0)
+                    {
+                        MessageBox.Show("El DNI ingresado no existe en la tabla de clientes.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
@@ -345,11 +378,12 @@ namespace pryAccesoGym
                         return;
                     }
 
-                    // Consulta para modificar el pago utilizando PagoID
-                    string query = "UPDATE Pagos SET Monto = @Monto, MetodoPago = @MetodoPago WHERE PagoID = @PagoID";
+                    // Consulta para modificar el pago incluyendo el DNI
+                    string query = "UPDATE Pagos SET DNI = @DNI, Monto = @Monto, MetodoPago = @MetodoPago WHERE PagoID = @PagoID";
 
                     int filasAfectadas = DatabaseHelper.ExecuteNonQuery(query, new SqlParameter[]
                     {
+                new SqlParameter("@DNI", nuevoDni),
                 new SqlParameter("@Monto", monto),
                 new SqlParameter("@MetodoPago", metodoPago),
                 new SqlParameter("@PagoID", pagoID)
@@ -375,5 +409,6 @@ namespace pryAccesoGym
                 MessageBox.Show("Error al modificar el pago: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }

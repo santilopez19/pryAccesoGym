@@ -61,7 +61,7 @@ namespace pryAccesoGym
         VALUES (@DNI, @Nombre, @Apellido, @FechaNacimiento, @Sexo, @FechaIngreso)";
 
                 SqlParameter[] parameters = new SqlParameter[]
-                {   
+                {
             new SqlParameter("@DNI", txtDni.Text.Trim()),
             new SqlParameter("@Nombre", txtNombre.Text.Trim()),
             new SqlParameter("@Apellido", txtApellido.Text.Trim()),
@@ -209,6 +209,69 @@ namespace pryAccesoGym
             catch (Exception ex)
             {
                 MessageBox.Show("Error al eliminar el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cmbFiltrado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBuscarClientes_TextChanged(object sender, EventArgs e)
+        {
+            // Filtrar automáticamente mientras se escribe en el campo de búsqueda
+            FiltrarClientes(txtBuscarClientes.Text.Trim());
+        }
+
+        private void btnBuscarDni_Click(object sender, EventArgs e)
+        {
+            // Si el campo de búsqueda está vacío, cargar todos los clientes
+            if (string.IsNullOrWhiteSpace(txtBuscarClientes.Text))
+            {
+                CargarClientes();
+            }
+            else
+            {
+                // Filtrar los clientes según el texto ingresado
+                FiltrarClientes(txtBuscarClientes.Text.Trim());
+            }
+        }
+        private void FiltrarClientes(string filtro)
+        {
+            try
+            {
+                // Verificar si hay un filtro activo
+                string query;
+                SqlParameter[] parameters;
+
+                if (!string.IsNullOrEmpty(filtro))
+                {
+                    // Consulta para buscar por DNI o Nombre
+                    query = @"
+                SELECT * 
+                FROM Clientes 
+                WHERE DNI LIKE @Filtro OR Nombre LIKE @Filtro
+                ORDER BY Nombre ASC";
+
+                    parameters = new SqlParameter[]
+                    {
+                new SqlParameter("@Filtro", "%" + filtro + "%")
+                    };
+                }
+                else
+                {
+                    // Si no hay filtro, cargar todos los clientes
+                    query = "SELECT * FROM Clientes ORDER BY Nombre ASC";
+                    parameters = null;
+                }
+
+                // Ejecutar la consulta y cargar los datos en el DataGridView
+                DataTable dataTable = DatabaseHelper.ExecuteQuery(query, parameters);
+                dgvClientes.DataSource = dataTable;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al filtrar los clientes: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
