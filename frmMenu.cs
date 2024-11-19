@@ -10,11 +10,14 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using Microsoft.Data.SqlClient;
 using static pryAccesoGym.bdGimnasio;
+using System.IO.Ports;
 
 namespace pryAccesoGym
 {
     public partial class frmMenu : Form
     {
+
+        private SerialPort arduinoPort;
         public frmMenu()
         {
             InitializeComponent();
@@ -410,5 +413,49 @@ namespace pryAccesoGym
             }
         }
 
+        private void btnAbrirPuerta1min_Click(object sender, EventArgs e)
+        {
+            AbrirPuerta(60000);
+        }
+
+        private void btnAbrirPuerta_Click(object sender, EventArgs e)
+        {
+            AbrirPuerta(5000);
+        }
+        private void AbrirPuerta(int tiempoEnMilisegundos)
+        {
+            try
+            {
+                // Abrir el puerto serie si no está abierto
+                if (!arduinoPort.IsOpen)
+                {
+                    arduinoPort.Open();
+                }
+
+                // Enviar el comando para abrir la puerta
+                arduinoPort.WriteLine("OPEN");
+
+                // Esperar el tiempo indicado antes de cerrar la puerta
+                Thread.Sleep(tiempoEnMilisegundos);
+
+                // Enviar el comando para cerrar la puerta
+                arduinoPort.WriteLine("CLOSE");
+
+                // Cerrar el puerto serie
+                arduinoPort.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al controlar la puerta: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Asegurarse de que el puerto esté cerrado al finalizar
+                if (arduinoPort.IsOpen)
+                {
+                    arduinoPort.Close();
+                }
+            }
+        }
     }
 }

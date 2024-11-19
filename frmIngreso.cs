@@ -11,11 +11,14 @@ using System.Windows.Forms;
 using static pryAccesoGym.bdGimnasio;
 using static System.Windows.Forms.DataFormats;
 using Microsoft.Data.SqlClient;
+using System.IO.Ports;
 
 namespace pryAccesoGym
 {
     public partial class frmIngreso : Form
     {
+
+        private SerialPort arduinoPort;
         public frmIngreso()
         {
             InitializeComponent();
@@ -112,20 +115,18 @@ namespace pryAccesoGym
 
                 DateTime fechaPago = Convert.ToDateTime(fechaPagoObj);
 
-                // Calcular la diferencia de días entre hoy y la fecha del último pago
                 TimeSpan diferencia = DateTime.Now - fechaPago;
 
                 if (diferencia.TotalDays <= 30)
                 {
                     lblAvisoIngreso.Text = $"{nombreCliente} está habilitado para ingresar.";
                     lblAvisoIngreso.ForeColor = Color.Green;
-
-                    // Aquí puedes agregar lógica para abrir la cerradura, si es necesario
+                    AbrirPuerta(5000);
                 }
 
                 else if (diferencia.TotalDays > 30 && diferencia.TotalDays <= 35)
                 {
-                    lblAvisoIngreso.Text = $"{nombreCliente} su cuota esta vencida desde el {fechaPago:dd/MM/yyyy}.";
+                    lblAvisoIngreso.Text = $"{nombreCliente} su cuota vencio el {fechaPago:dd/MM/yyyy}.";
                     lblAvisoIngreso.ForeColor = Color.Orange;
                 }
                 else
@@ -152,10 +153,42 @@ namespace pryAccesoGym
 
             lblAvisoIngreso.Text = "";
         }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        private void AbrirPuerta(int tiempoEnMilisegundos)
         {
+            try
+            {
+                // Abrir el puerto serie si no está abierto
+                if (!arduinoPort.IsOpen)
+                {
+                    arduinoPort.Open();
+                }
 
+                // Enviar el comando para abrir la puerta
+                arduinoPort.WriteLine("OPEN");
+                MessageBox.Show($"Puerta abierta por {tiempoEnMilisegundos / 1000} segundos.", "Puerta abierta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Esperar el tiempo indicado antes de cerrar la puerta
+                Thread.Sleep(tiempoEnMilisegundos);
+
+                // Enviar el comando para cerrar la puerta
+                arduinoPort.WriteLine("CLOSE");
+                MessageBox.Show("Puerta cerrada.", "Puerta cerrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Cerrar el puerto serie
+                arduinoPort.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al controlar la puerta: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Asegurarse de que el puerto esté cerrado al finalizar
+                if (arduinoPort.IsOpen)
+                {
+                    arduinoPort.Close();
+                }
+            }
         }
     }
 }

@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="linq2db.SqlServer.MS" Version="5.4.1" />
+    <PackageReference Include="System.IO.Ports" Version="9.0.0" />
   </ItemGroup>
 
 </Project>

@@ -77,6 +77,7 @@
             btnAbrirPuerta.TabIndex = 0;
             btnAbrirPuerta.Text = "Abrir Puerta";
             btnAbrirPuerta.UseVisualStyleBackColor = true;
+            btnAbrirPuerta.Click += btnAbrirPuerta_Click;
             // 
             // btnAbrirPuerta1min
             // 
@@ -86,6 +87,7 @@
             btnAbrirPuerta1min.TabIndex = 1;
             btnAbrirPuerta1min.Text = "Abrir Puerta 1min";
             btnAbrirPuerta1min.UseVisualStyleBackColor = true;
+            btnAbrirPuerta1min.Click += btnAbrirPuerta1min_Click;
             // 
             // btnSalir
             // 
