@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient; // Asegúrate de usar esta biblioteca
+﻿using Microsoft.Data.SqlClient; 
 using System;
 using System.Data;
 
@@ -13,7 +13,7 @@ namespace pryAccesoGym
 
             public static object ExecuteScalar(string query, SqlParameter[] parameters)
             {
-                using (SqlConnection connection = new SqlConnection(connectionString)) // Cambiado a connectionString
+                using (SqlConnection connection = new SqlConnection(connectionString)) 
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
