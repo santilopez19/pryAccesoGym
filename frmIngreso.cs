@@ -121,7 +121,7 @@ namespace pryAccesoGym
                 {
                     lblAvisoIngreso.Text = $"{nombreCliente} está habilitado para ingresar.";
                     lblAvisoIngreso.ForeColor = Color.Green;
-                    AbrirPuerta(5000);
+                    //AbrirPuerta(5000);
                 }
 
                 else if (diferencia.TotalDays > 30 && diferencia.TotalDays <= 35)

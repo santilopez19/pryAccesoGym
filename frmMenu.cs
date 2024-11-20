@@ -415,12 +415,12 @@ namespace pryAccesoGym
 
         private void btnAbrirPuerta1min_Click(object sender, EventArgs e)
         {
-            AbrirPuerta(60000);
+           // AbrirPuerta(60000);
         }
 
         private void btnAbrirPuerta_Click(object sender, EventArgs e)
         {
-            AbrirPuerta(5000);
+            //AbrirPuerta(5000);
         }
         private void AbrirPuerta(int tiempoEnMilisegundos)
         {
