@@ -6,7 +6,13 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>kettlebell_equipment_gym_fitness_icon_224876.ico</ApplicationIcon>
+    <AssemblyName>SisGym</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="kettlebell_equipment_gym_fitness_icon_224876.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="linq2db.SqlServer.MS" Version="5.4.1" />

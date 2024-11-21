@@ -31,8 +31,7 @@ VALUES
                 using (SqlConnection connection = new SqlConnection(connectionString)) 
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddRange(parameters);
+                    {                        command.Parameters.AddRange(parameters);
                         connection.Open();
                         return command.ExecuteScalar();
                     }
