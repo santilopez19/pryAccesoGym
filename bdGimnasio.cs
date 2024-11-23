@@ -19,10 +19,10 @@ VALUES
 ('45678901', 'Lucía', 'Martínez', 'F', '1992-03-10', '2023-11-01'); 
             INSERT INTO Pagos(DNI, FechaPago, Monto, MetodoPago)
 VALUES
-('12345678', '2023-10-01', 1500.00, 'Efectivo'),
-('23456789', '2023-10-15', 1200.00, 'Tarjeta'),
-('34567890', '2023-09-10', 1000.00, 'Transferencia'),
-('45678901', '2023-10-20', 1300.00, 'Efectivo'); */
+('12345678', '2024-10-01', 1500.00, 'Efectivo'),
+('23456789', '2024-10-15', 1200.00, 'Tarjeta'),
+('34567890', '2024-09-10', 1000.00, 'Transferencia'),
+('45678901', '2024-10-20', 1300.00, 'Efectivo'); */
             // Cadena de conexión
             private static readonly string connectionString = "server=localhost; database=dbGimnasio; integrated security=true; Encrypt=False;";
 

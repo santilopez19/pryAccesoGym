@@ -67,8 +67,8 @@ namespace pryAccesoGym
             try
             {
                 string dni = txtDniIngreso.Text.Trim();
-
-                // Validar que el DNI no esté vacío
+                txtDniIngreso.Text = "";
+                IniciarTemporizador();
                 if (string.IsNullOrWhiteSpace(dni))
                 {
                     lblAvisoIngreso.Text = "Por favor, ingrese un DNI válido.";
@@ -76,14 +76,12 @@ namespace pryAccesoGym
                     return;
                 }
 
-                // Validar si el cliente está registrado en la base de datos
                 string clienteQuery = "SELECT Nombre FROM Clientes WHERE DNI = @DNI";
                 object nombreClienteObj = DatabaseHelper.ExecuteScalar(clienteQuery, new SqlParameter[]
                 {
             new SqlParameter("@DNI", dni)
                 });
 
-                // Verificar si el cliente no existe
                 if (nombreClienteObj == null || nombreClienteObj == DBNull.Value)
                 {
                     lblAvisoIngreso.Text = "El DNI no está registrado en el sistema.";
@@ -93,45 +91,43 @@ namespace pryAccesoGym
 
                 string nombreCliente = nombreClienteObj.ToString();
 
-                // Consultar la fecha del último pago del cliente
                 string pagoQuery = @"
-            SELECT TOP 1 FechaPago 
-            FROM Pagos 
-            WHERE DNI = @DNI 
-            ORDER BY FechaPago DESC";
+        SELECT TOP 1 FechaPago 
+        FROM Pagos 
+        WHERE DNI = @DNI 
+        ORDER BY FechaPago DESC";
 
                 object fechaPagoObj = DatabaseHelper.ExecuteScalar(pagoQuery, new SqlParameter[]
                 {
             new SqlParameter("@DNI", dni)
                 });
 
-                // Verificar si no se encontró ningún pago
                 if (fechaPagoObj == null || fechaPagoObj == DBNull.Value)
                 {
                     lblAvisoIngreso.Text = $"No se encontraron pagos registrados para {nombreCliente}.";
                     lblAvisoIngreso.ForeColor = Color.Red;
                     return;
                 }
-
+                txtDniIngreso.Text = "";
                 DateTime fechaPago = Convert.ToDateTime(fechaPagoObj);
+                DateTime fechaProximoPago = fechaPago.AddMonths(1);
 
-                TimeSpan diferencia = DateTime.Now - fechaPago;
+                TimeSpan diferencia = fechaProximoPago - DateTime.Now;
 
-                if (diferencia.TotalDays <= 30)
+                if (diferencia.TotalDays > 3)
                 {
                     lblAvisoIngreso.Text = $"{nombreCliente} está habilitado para ingresar.";
                     lblAvisoIngreso.ForeColor = Color.Green;
                     //AbrirPuerta(5000);
                 }
-
-                else if (diferencia.TotalDays > 30 && diferencia.TotalDays <= 35)
+                else if (diferencia.TotalDays <= 3 && diferencia.TotalDays >= 0)
                 {
-                    lblAvisoIngreso.Text = $"{nombreCliente} su cuota vencio el {fechaPago:dd/MM/yyyy}.";
+                    lblAvisoIngreso.Text = $"{nombreCliente}, tiene que pagar su cuota antes del {fechaProximoPago:dd/MM/yyyy}.";
                     lblAvisoIngreso.ForeColor = Color.Orange;
                 }
                 else
                 {
-                    lblAvisoIngreso.Text = $"{nombreCliente} no tiene el abono al día.";
+                    lblAvisoIngreso.Text = $"{nombreCliente}, su cuota venció el {fechaProximoPago:dd/MM/yyyy}.";
                     lblAvisoIngreso.ForeColor = Color.Red;
                 }
             }
@@ -139,7 +135,6 @@ namespace pryAccesoGym
             {
                 MessageBox.Show("Ocurrió un error al verificar el ingreso: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            txtDniIngreso.Text = "";
         }
 
         private void txtDniIngreso_TextChanged(object sender, EventArgs e)
@@ -150,7 +145,6 @@ namespace pryAccesoGym
         {
 
             tLbl.Stop();
-
             lblAvisoIngreso.Text = "";
         }
         private void AbrirPuerta(int tiempoEnMilisegundos)
