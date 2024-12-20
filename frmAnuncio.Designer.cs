@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAnuncio));
             btnSalir = new Button();
             txtAnuncio = new TextBox();
-            btnIngresar = new Button();
             btnGuardarCambios = new Button();
             rbtRojo = new RadioButton();
             rbtAzul = new RadioButton();
@@ -44,7 +43,7 @@
             // 
             btnSalir.BackColor = Color.Gold;
             btnSalir.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            btnSalir.Location = new Point(725, 12);
+            btnSalir.Location = new Point(982, 12);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(103, 35);
             btnSalir.TabIndex = 27;
@@ -55,30 +54,18 @@
             // txtAnuncio
             // 
             txtAnuncio.Font = new Font("Arial Rounded MT Bold", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            txtAnuncio.Location = new Point(12, 68);
+            txtAnuncio.Location = new Point(74, 53);
             txtAnuncio.Multiline = true;
             txtAnuncio.Name = "txtAnuncio";
-            txtAnuncio.Size = new Size(460, 213);
+            txtAnuncio.Size = new Size(527, 461);
             txtAnuncio.TabIndex = 28;
             txtAnuncio.TextAlign = HorizontalAlignment.Center;
-            // 
-            // btnIngresar
-            // 
-            btnIngresar.Anchor = AnchorStyles.None;
-            btnIngresar.FlatStyle = FlatStyle.System;
-            btnIngresar.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            btnIngresar.Location = new Point(-227, -140);
-            btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(159, 51);
-            btnIngresar.TabIndex = 29;
-            btnIngresar.Text = "Ingresar";
-            btnIngresar.UseVisualStyleBackColor = true;
             // 
             // btnGuardarCambios
             // 
             btnGuardarCambios.BackColor = Color.PaleGreen;
             btnGuardarCambios.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            btnGuardarCambios.Location = new Point(614, 324);
+            btnGuardarCambios.Location = new Point(650, 245);
             btnGuardarCambios.Name = "btnGuardarCambios";
             btnGuardarCambios.Size = new Size(214, 35);
             btnGuardarCambios.TabIndex = 30;
@@ -114,7 +101,7 @@
             grbColores.Controls.Add(rbtAzul);
             grbColores.Controls.Add(rbtRojo);
             grbColores.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            grbColores.Location = new Point(516, 68);
+            grbColores.Location = new Point(650, 53);
             grbColores.Name = "grbColores";
             grbColores.Size = new Size(302, 164);
             grbColores.TabIndex = 33;
@@ -136,10 +123,9 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(840, 371);
+            ClientSize = new Size(1097, 557);
             Controls.Add(grbColores);
             Controls.Add(btnGuardarCambios);
-            Controls.Add(btnIngresar);
             Controls.Add(txtAnuncio);
             Controls.Add(btnSalir);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -156,7 +142,6 @@
 
         private Button btnSalir;
         private TextBox txtAnuncio;
-        private Button btnIngresar;
         private Button btnGuardarCambios;
         private RadioButton rbtRojo;
         private RadioButton rbtAzul;

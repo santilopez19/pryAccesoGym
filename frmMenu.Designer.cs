@@ -127,9 +127,9 @@
             // 
             // btnGestionarClientes
             // 
-            btnGestionarClientes.Location = new Point(14, 65);
+            btnGestionarClientes.Location = new Point(14, 61);
             btnGestionarClientes.Name = "btnGestionarClientes";
-            btnGestionarClientes.Size = new Size(158, 63);
+            btnGestionarClientes.Size = new Size(158, 73);
             btnGestionarClientes.TabIndex = 4;
             btnGestionarClientes.Text = "Gestionar Clientes";
             btnGestionarClientes.UseVisualStyleBackColor = true;
@@ -137,7 +137,7 @@
             // 
             // btnIngresos
             // 
-            btnIngresos.Location = new Point(14, 30);
+            btnIngresos.Location = new Point(14, 22);
             btnIngresos.Name = "btnIngresos";
             btnIngresos.Size = new Size(158, 33);
             btnIngresos.TabIndex = 5;

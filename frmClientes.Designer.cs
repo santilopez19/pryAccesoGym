@@ -40,6 +40,7 @@
             lblFechaNac = new Label();
             dtpFechaNac = new DateTimePicker();
             grbDatosPersonales = new GroupBox();
+            btnSalir = new Button();
             lblTelefono = new Label();
             txtTelefono = new TextBox();
             lblEmail = new Label();
@@ -50,10 +51,9 @@
             btnModificarUsuario = new Button();
             grbListaClientes = new GroupBox();
             btnEliminar = new Button();
-            btnBuscarDni = new Button();
             dgvClientes = new DataGridView();
+            btnBuscarDni = new Button();
             txtBuscarClientes = new TextBox();
-            btnSalir = new Button();
             grbDatosPersonales.SuspendLayout();
             grbListaClientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
@@ -110,7 +110,7 @@
             // lblSexo
             // 
             lblSexo.AutoSize = true;
-            lblSexo.Location = new Point(436, 136);
+            lblSexo.Location = new Point(445, 129);
             lblSexo.Name = "lblSexo";
             lblSexo.Size = new Size(53, 25);
             lblSexo.TabIndex = 7;
@@ -119,7 +119,7 @@
             // cmbSexo
             // 
             cmbSexo.FormattingEnabled = true;
-            cmbSexo.Location = new Point(495, 133);
+            cmbSexo.Location = new Point(504, 126);
             cmbSexo.Name = "cmbSexo";
             cmbSexo.Size = new Size(67, 33);
             cmbSexo.TabIndex = 17;
@@ -127,7 +127,7 @@
             // lblFechaNac
             // 
             lblFechaNac.AutoSize = true;
-            lblFechaNac.Location = new Point(436, 90);
+            lblFechaNac.Location = new Point(445, 83);
             lblFechaNac.Name = "lblFechaNac";
             lblFechaNac.Size = new Size(130, 25);
             lblFechaNac.TabIndex = 18;
@@ -135,7 +135,7 @@
             // 
             // dtpFechaNac
             // 
-            dtpFechaNac.Location = new Point(572, 87);
+            dtpFechaNac.Location = new Point(581, 80);
             dtpFechaNac.Name = "dtpFechaNac";
             dtpFechaNac.Size = new Size(268, 31);
             dtpFechaNac.TabIndex = 19;
@@ -162,17 +162,28 @@
             grbDatosPersonales.Controls.Add(lblSexo);
             grbDatosPersonales.FlatStyle = FlatStyle.System;
             grbDatosPersonales.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            grbDatosPersonales.Location = new Point(17, 12);
+            grbDatosPersonales.Location = new Point(12, 12);
             grbDatosPersonales.Name = "grbDatosPersonales";
-            grbDatosPersonales.Size = new Size(1289, 178);
+            grbDatosPersonales.Size = new Size(1294, 178);
             grbDatosPersonales.TabIndex = 21;
             grbDatosPersonales.TabStop = false;
             grbDatosPersonales.Text = "Datos Personales";
             // 
+            // btnSalir
+            // 
+            btnSalir.BackColor = Color.Gold;
+            btnSalir.Location = new Point(1454, 0);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(103, 35);
+            btnSalir.TabIndex = 26;
+            btnSalir.Text = "Volver";
+            btnSalir.UseVisualStyleBackColor = false;
+            btnSalir.Click += btnSalir_Click;
+            // 
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
-            lblTelefono.Location = new Point(884, 45);
+            lblTelefono.Location = new Point(890, 38);
             lblTelefono.Name = "lblTelefono";
             lblTelefono.Size = new Size(86, 25);
             lblTelefono.TabIndex = 23;
@@ -180,7 +191,7 @@
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(976, 45);
+            txtTelefono.Location = new Point(982, 38);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(283, 31);
             txtTelefono.TabIndex = 24;
@@ -188,7 +199,7 @@
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(895, 90);
+            lblEmail.Location = new Point(901, 83);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(65, 25);
             lblEmail.TabIndex = 25;
@@ -196,14 +207,14 @@
             // 
             // txtMail
             // 
-            txtMail.Location = new Point(976, 87);
+            txtMail.Location = new Point(982, 80);
             txtMail.Name = "txtMail";
             txtMail.Size = new Size(283, 31);
             txtMail.TabIndex = 26;
             // 
             // dtpFechaIngreso
             // 
-            dtpFechaIngreso.Location = new Point(572, 45);
+            dtpFechaIngreso.Location = new Point(581, 38);
             dtpFechaIngreso.Name = "dtpFechaIngreso";
             dtpFechaIngreso.Size = new Size(268, 31);
             dtpFechaIngreso.TabIndex = 22;
@@ -211,7 +222,7 @@
             // lblFechaIngreso
             // 
             lblFechaIngreso.AutoSize = true;
-            lblFechaIngreso.Location = new Point(436, 48);
+            lblFechaIngreso.Location = new Point(445, 41);
             lblFechaIngreso.Name = "lblFechaIngreso";
             lblFechaIngreso.Size = new Size(130, 25);
             lblFechaIngreso.TabIndex = 21;
@@ -219,8 +230,9 @@
             // 
             // btnCrearUsuario
             // 
+            btnCrearUsuario.Anchor = AnchorStyles.None;
             btnCrearUsuario.BackColor = Color.PaleGreen;
-            btnCrearUsuario.Location = new Point(850, 22);
+            btnCrearUsuario.Location = new Point(861, 22);
             btnCrearUsuario.Name = "btnCrearUsuario";
             btnCrearUsuario.Size = new Size(115, 39);
             btnCrearUsuario.TabIndex = 23;
@@ -230,8 +242,9 @@
             // 
             // btnModificarUsuario
             // 
+            btnModificarUsuario.Anchor = AnchorStyles.None;
             btnModificarUsuario.BackColor = Color.Khaki;
-            btnModificarUsuario.Location = new Point(971, 22);
+            btnModificarUsuario.Location = new Point(982, 22);
             btnModificarUsuario.Name = "btnModificarUsuario";
             btnModificarUsuario.Size = new Size(141, 39);
             btnModificarUsuario.TabIndex = 24;
@@ -243,9 +256,9 @@
             // 
             grbListaClientes.Controls.Add(btnEliminar);
             grbListaClientes.Controls.Add(btnModificarUsuario);
+            grbListaClientes.Controls.Add(dgvClientes);
             grbListaClientes.Controls.Add(btnBuscarDni);
             grbListaClientes.Controls.Add(btnCrearUsuario);
-            grbListaClientes.Controls.Add(dgvClientes);
             grbListaClientes.Controls.Add(txtBuscarClientes);
             grbListaClientes.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             grbListaClientes.Location = new Point(12, 196);
@@ -257,14 +270,28 @@
             // 
             // btnEliminar
             // 
+            btnEliminar.Anchor = AnchorStyles.None;
             btnEliminar.BackColor = Color.LightCoral;
-            btnEliminar.Location = new Point(1118, 22);
+            btnEliminar.Location = new Point(1129, 22);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(146, 39);
             btnEliminar.TabIndex = 25;
             btnEliminar.Text = "Eliminar Usuario";
             btnEliminar.UseVisualStyleBackColor = false;
             btnEliminar.Click += btnEliminar_Click;
+            // 
+            // dgvClientes
+            // 
+            dgvClientes.AllowUserToAddRows = false;
+            dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvClientes.Location = new Point(9, 69);
+            dgvClientes.Name = "dgvClientes";
+            dgvClientes.RowHeadersWidth = 51;
+            dgvClientes.RowTemplate.Height = 29;
+            dgvClientes.Size = new Size(1279, 438);
+            dgvClientes.TabIndex = 7;
+            dgvClientes.CellClick += dgvClientes_CellClick;
+            dgvClientes.CellContentClick += dgvClientes_CellClick;
             // 
             // btnBuscarDni
             // 
@@ -276,19 +303,6 @@
             btnBuscarDni.UseVisualStyleBackColor = true;
             btnBuscarDni.Click += btnBuscarDni_Click;
             // 
-            // dgvClientes
-            // 
-            dgvClientes.AllowUserToAddRows = false;
-            dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientes.Location = new Point(5, 73);
-            dgvClientes.Name = "dgvClientes";
-            dgvClientes.RowHeadersWidth = 51;
-            dgvClientes.RowTemplate.Height = 29;
-            dgvClientes.Size = new Size(1283, 434);
-            dgvClientes.TabIndex = 7;
-            dgvClientes.CellClick += dgvClientes_CellClick;
-            dgvClientes.CellContentClick += dgvClientes_CellClick;
-            // 
             // txtBuscarClientes
             // 
             txtBuscarClientes.Location = new Point(9, 30);
@@ -296,17 +310,6 @@
             txtBuscarClientes.Size = new Size(204, 31);
             txtBuscarClientes.TabIndex = 12;
             txtBuscarClientes.TextChanged += txtBuscarClientes_TextChanged;
-            // 
-            // btnSalir
-            // 
-            btnSalir.BackColor = Color.Gold;
-            btnSalir.Location = new Point(1186, 0);
-            btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(103, 35);
-            btnSalir.TabIndex = 26;
-            btnSalir.Text = "Volver";
-            btnSalir.UseVisualStyleBackColor = false;
-            btnSalir.Click += btnSalir_Click;
             // 
             // frmClientes
             // 

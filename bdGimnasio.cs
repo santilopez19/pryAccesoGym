@@ -10,12 +10,9 @@ namespace pryAccesoGym
     {
         public static class DatabaseHelper
         {
-            /* -- Inserción de clientes
-             
-             */
-            // Cadena de conexión
-            // private static readonly string connectionString = "server=DESKTOP-19DBOAA\\SQLEXPRESS; database=dbGimnasio; integrated security=true; Encrypt=False;";
-            static string connectionString = "server=localhost; database=dbGimnasio; integrated security=true; Encrypt=False;";
+            
+            private static readonly string connectionString = "server=DESKTOP-19DBOAA\\SQLEXPRESS; database=dbGimnasio; integrated security=true; Encrypt=False;";
+            //static string connectionString = "server=localhost; database=dbGimnasio; integrated security=true; Encrypt=False;";
 
 
             public static object ExecuteScalar(string query, SqlParameter[] parameters)
