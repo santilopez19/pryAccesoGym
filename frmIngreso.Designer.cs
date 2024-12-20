@@ -36,12 +36,14 @@
             tLbl = new System.Windows.Forms.Timer(components);
             lblDniIngrese = new Label();
             lblAnuncio = new Label();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnIngresar
             // 
             btnIngresar.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            btnIngresar.Location = new Point(563, 337);
+            btnIngresar.Location = new Point(551, 439);
             btnIngresar.Name = "btnIngresar";
             btnIngresar.Size = new Size(178, 55);
             btnIngresar.TabIndex = 0;
@@ -51,8 +53,8 @@
             // 
             // txtDniIngreso
             // 
-            txtDniIngreso.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            txtDniIngreso.Location = new Point(517, 269);
+            txtDniIngreso.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            txtDniIngreso.Location = new Point(501, 373);
             txtDniIngreso.Multiline = true;
             txtDniIngreso.Name = "txtDniIngreso";
             txtDniIngreso.Size = new Size(270, 46);
@@ -62,8 +64,9 @@
             // 
             // lblAvisoIngreso
             // 
+            lblAvisoIngreso.BackColor = Color.Transparent;
             lblAvisoIngreso.Font = new Font("Arial Rounded MT Bold", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            lblAvisoIngreso.Location = new Point(327, 412);
+            lblAvisoIngreso.Location = new Point(311, 513);
             lblAvisoIngreso.Name = "lblAvisoIngreso";
             lblAvisoIngreso.Size = new Size(653, 111);
             lblAvisoIngreso.TabIndex = 2;
@@ -79,7 +82,7 @@
             // 
             lblDniIngrese.AutoSize = true;
             lblDniIngrese.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
-            lblDniIngrese.Location = new Point(489, 193);
+            lblDniIngrese.Location = new Point(470, 316);
             lblDniIngrese.Name = "lblDniIngrese";
             lblDniIngrese.Size = new Size(345, 54);
             lblDniIngrese.TabIndex = 3;
@@ -95,21 +98,34 @@
             lblAnuncio.TabIndex = 4;
             lblAnuncio.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.image_removebg_preview__1_;
+            pictureBox1.Location = new Point(470, -11);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(316, 339);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
+            // 
             // frmIngreso
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(1318, 721);
             Controls.Add(lblAnuncio);
             Controls.Add(lblAvisoIngreso);
             Controls.Add(lblDniIngrese);
             Controls.Add(btnIngresar);
             Controls.Add(txtDniIngreso);
+            Controls.Add(pictureBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmIngreso";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ingreso";
             Load += frmIngreso_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -122,5 +138,6 @@
         private System.Windows.Forms.Timer tLbl;
         private Label lblDniIngrese;
         private Label lblAnuncio;
+        private PictureBox pictureBox1;
     }
 }
