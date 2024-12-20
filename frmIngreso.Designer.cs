@@ -63,9 +63,9 @@
             // lblAvisoIngreso
             // 
             lblAvisoIngreso.Font = new Font("Arial Rounded MT Bold", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            lblAvisoIngreso.Location = new Point(338, 414);
+            lblAvisoIngreso.Location = new Point(327, 412);
             lblAvisoIngreso.Name = "lblAvisoIngreso";
-            lblAvisoIngreso.Size = new Size(629, 111);
+            lblAvisoIngreso.Size = new Size(653, 111);
             lblAvisoIngreso.TabIndex = 2;
             lblAvisoIngreso.TextAlign = ContentAlignment.MiddleCenter;
             lblAvisoIngreso.Click += lblAvisoIngreso_Click;
@@ -89,9 +89,9 @@
             // 
             lblAnuncio.Font = new Font("Arial Rounded MT Bold", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
             lblAnuncio.ForeColor = SystemColors.ActiveCaptionText;
-            lblAnuncio.Location = new Point(12, 120);
+            lblAnuncio.Location = new Point(12, 9);
             lblAnuncio.Name = "lblAnuncio";
-            lblAnuncio.Size = new Size(460, 213);
+            lblAnuncio.Size = new Size(340, 388);
             lblAnuncio.TabIndex = 4;
             lblAnuncio.TextAlign = ContentAlignment.MiddleCenter;
             // 
