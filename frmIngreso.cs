@@ -116,7 +116,12 @@ namespace pryAccesoGym
 
                 if (diferencia.TotalDays > 3)
                 {
-                    lblAvisoIngreso.Text = $"{nombreCliente} está habilitado para ingresar.";
+                    lblAvisoIngreso.Text = $"{nombreCliente}, su cuota venció el {fechaProximoPago:dd/MM/yyyy}.";
+                    lblAvisoIngreso.ForeColor = Color.Red;
+                }
+                else
+                {
+                    lblAvisoIngreso.Text = $"{nombreCliente}, tiene que pagar su cuota antes del {fechaProximoPago:dd/MM/yyyy}.";
                     lblAvisoIngreso.ForeColor = Color.Green;
                     //AbrirPuerta(5000);
                 }
