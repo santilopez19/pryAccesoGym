@@ -328,6 +328,7 @@ namespace pryAccesoGym
                     rbtEfectivo.Checked = true;
                 else if (metodoPago == "Transferencia")
                     rbtTransferencia.Checked = true;
+                dtpFechaPago.Value = Convert.ToDateTime(dgvClientes.Rows[e.RowIndex].Cells["Fecha de Pago"].Value);
             }
         }
 
@@ -335,67 +336,50 @@ namespace pryAccesoGym
         {
             try
             {
-                // Verificar si hay una fila seleccionada
                 if (dgvClientes.CurrentRow != null)
                 {
-                    // Obtener el PagoID del registro seleccionado
                     int pagoID = Convert.ToInt32(dgvClientes.CurrentRow.Cells["PagoID"].Value);
-
-                    // Obtener los valores ingresados por el usuario
                     string nuevoDni = txtDniAbono.Text.Trim();
                     string montoTexto = txtMonto.Text.Trim();
                     decimal monto;
 
-                    // Validar el monto ingresado
                     if (!decimal.TryParse(montoTexto, out monto))
                     {
                         MessageBox.Show("El monto ingresado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
-                    // Validar que el nuevo DNI no esté vacío
                     if (string.IsNullOrWhiteSpace(nuevoDni))
                     {
                         MessageBox.Show("El campo DNI no puede estar vacío.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
-                    // Validar que el nuevo DNI exista en la tabla Clientes
-                    string validacionDniQuery = "SELECT COUNT(*) FROM Clientes WHERE DNI = @DNI";
-                    int existeDni = (int)DatabaseHelper.ExecuteScalar(validacionDniQuery, new SqlParameter[]
-                    {
-                new SqlParameter("@DNI", nuevoDni)
-                    });
-
-                    if (existeDni == 0)
-                    {
-                        MessageBox.Show("El DNI ingresado no existe en la tabla de clientes.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-
-                    // Determinar el método de pago
                     string metodoPago = rbtEfectivo.Checked ? "Efectivo" : rbtTransferencia.Checked ? "Transferencia" : "";
+
                     if (string.IsNullOrEmpty(metodoPago))
                     {
                         MessageBox.Show("Debe seleccionar un método de pago.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
-                    // Consulta para modificar el pago incluyendo el DNI
-                    string query = "UPDATE Pagos SET DNI = @DNI, Monto = @Monto, MetodoPago = @MetodoPago WHERE PagoID = @PagoID";
+                    DateTime fechaPago = dtpFechaPago.Value;
+
+                    string query = "UPDATE Pagos SET DNI = @DNI, Monto = @Monto, MetodoPago = @MetodoPago, FechaPago = @FechaPago WHERE PagoID = @PagoID";
 
                     int filasAfectadas = DatabaseHelper.ExecuteNonQuery(query, new SqlParameter[]
                     {
                 new SqlParameter("@DNI", nuevoDni),
                 new SqlParameter("@Monto", monto),
                 new SqlParameter("@MetodoPago", metodoPago),
+                new SqlParameter("@FechaPago", fechaPago),
                 new SqlParameter("@PagoID", pagoID)
                     });
 
                     if (filasAfectadas > 0)
                     {
                         MessageBox.Show("Pago modificado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        CargarPagos(); // Actualizar el DataGridView después de modificar
+                        CargarPagos();
                     }
                     else
                     {
@@ -415,7 +399,7 @@ namespace pryAccesoGym
 
         private void btnAbrirPuerta1min_Click(object sender, EventArgs e)
         {
-           // AbrirPuerta(60000);
+            // AbrirPuerta(60000);
         }
 
         private void btnAbrirPuerta_Click(object sender, EventArgs e)
@@ -456,6 +440,13 @@ namespace pryAccesoGym
                     arduinoPort.Close();
                 }
             }
+        }
+
+        private void btnCartelIngreso_Click(object sender, EventArgs e)
+        {
+            frmAnuncio frmAnuncio = new frmAnuncio();
+            frmAnuncio.Show();
+            this.Hide();
         }
     }
 }

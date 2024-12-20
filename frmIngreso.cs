@@ -17,7 +17,6 @@ namespace pryAccesoGym
 {
     public partial class frmIngreso : Form
     {
-
         private SerialPort arduinoPort;
         public frmIngreso()
         {
@@ -25,6 +24,7 @@ namespace pryAccesoGym
             this.KeyPreview = true;
             this.KeyDown += VolverPagina_KeyDown;
             this.KeyDown += EnterKey_KeyDown;
+
 
         }
         private void EnterKey_KeyDown(object sender, KeyEventArgs e)
@@ -46,6 +46,7 @@ namespace pryAccesoGym
         private void frmIngreso_Load(object sender, EventArgs e)
         {
             txtDniIngreso.Focus();
+            CargarAnuncio();
         }
         private void VolverPagina_KeyDown(object sender, KeyEventArgs e)
         {
@@ -111,24 +112,31 @@ namespace pryAccesoGym
                 txtDniIngreso.Text = "";
                 DateTime fechaPago = Convert.ToDateTime(fechaPagoObj);
                 DateTime fechaProximoPago = fechaPago.AddMonths(1);
+                DateTime fechaLimiteAviso = fechaProximoPago.AddDays(-10);
 
-                TimeSpan diferencia = fechaProximoPago - DateTime.Now;
-
-                if (diferencia.TotalDays > 3)
+                if (DateTime.Now >= fechaLimiteAviso && DateTime.Now < fechaProximoPago)
                 {
-                    lblAvisoIngreso.Text = $"{nombreCliente} está habilitado para ingresar.";
-                    lblAvisoIngreso.ForeColor = Color.Green;
-                    //AbrirPuerta(5000);
+                    lblAvisoIngreso.Text = $"{nombreCliente}, su cuota vence el {fechaProximoPago:dd/MM/yyyy}.";
+                    lblAvisoIngreso.ForeColor = Color.Orange; 
                 }
-                else if (diferencia.TotalDays <= 3 && diferencia.TotalDays >= 0)
-                {
-                    lblAvisoIngreso.Text = $"{nombreCliente}, tiene que pagar su cuota antes del {fechaProximoPago:dd/MM/yyyy}.";
-                    lblAvisoIngreso.ForeColor = Color.Orange;
-                }
-                else
+                else if (DateTime.Now >= fechaProximoPago)
                 {
                     lblAvisoIngreso.Text = $"{nombreCliente}, su cuota venció el {fechaProximoPago:dd/MM/yyyy}.";
                     lblAvisoIngreso.ForeColor = Color.Red;
+                }
+                else
+                {// Lista de mensajes de bienvenida
+                    string[] mensajesBienvenida = new string[]
+                    {
+    $"¡Hola {nombreCliente}! 😄 ¡Qué bueno verte de nuevo!",
+    $"¡Hola {nombreCliente}! 😄 ¡Vamos por más juntos! 💪",
+    $"¡Hola {nombreCliente}! 🏋️‍♂️ ¡Qué bueno verte de nuevo!",
+    $"¡Hola {nombreCliente}! ✨ ¡Va a ser un gran día de entrenamiento! 💥"
+                    };
+                    Random random = new Random();
+                    string mensajeAleatorio = mensajesBienvenida[random.Next(mensajesBienvenida.Length)];
+                    lblAvisoIngreso.Text = mensajeAleatorio;
+                    lblAvisoIngreso.ForeColor = Color.Green;
                 }
             }
             catch (Exception ex)
@@ -136,7 +144,45 @@ namespace pryAccesoGym
                 MessageBox.Show("Ocurrió un error al verificar el ingreso: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void CargarAnuncio()
+        {
+            try
+            {
+                string query = "SELECT Texto, Color FROM Anuncio WHERE Id = 1";
+                DataTable dataTable = bdGimnasio.DatabaseHelper.ExecuteQuery(query);
 
+                if (dataTable.Rows.Count > 0)
+                {
+                    DataRow row = dataTable.Rows[0];
+                    lblAnuncio.Text = row["Texto"].ToString();
+
+                    string color = row["Color"].ToString();
+                    switch (color.ToLower())
+                    {
+                        case "azul":
+                            lblAnuncio.ForeColor = Color.Blue;
+                            break;
+                        case "rojo":
+                            lblAnuncio.ForeColor = Color.Red;
+                            break;
+                        case "negro":
+                            lblAnuncio.ForeColor = Color.Black;
+                            break;
+                    }
+
+                    // Cambiar borde si el texto no está vacío
+                    if (!string.IsNullOrWhiteSpace(lblAnuncio.Text))
+                    {
+                        lblAnuncio.BorderStyle = BorderStyle.None; // Quita el borde predeterminado
+                        this.Paint += new PaintEventHandler(DibujarBordeAnuncio);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar el anuncio: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void txtDniIngreso_TextChanged(object sender, EventArgs e)
         {
 
@@ -181,6 +227,19 @@ namespace pryAccesoGym
                 if (arduinoPort.IsOpen)
                 {
                     arduinoPort.Close();
+                }
+            }
+        }
+        private void DibujarBordeAnuncio(object sender, PaintEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(lblAnuncio.Text))
+            {
+                using (Pen pen = new Pen(Color.Red, 2))
+                {
+                    // Calcula la posición del borde basado en el lblAnuncio
+                    Rectangle rect = lblAnuncio.Bounds;
+                    rect.Inflate(2, 2); // Ajustar para que el borde no quede pegado al texto
+                    e.Graphics.DrawRectangle(pen, rect);
                 }
             }
         }
