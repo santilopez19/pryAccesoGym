@@ -40,6 +40,7 @@
             lblFechaNac = new Label();
             dtpFechaNac = new DateTimePicker();
             grbDatosPersonales = new GroupBox();
+            gpbEstado = new GroupBox();
             btnSalir = new Button();
             lblTelefono = new Label();
             txtTelefono = new TextBox();
@@ -50,11 +51,15 @@
             btnCrearUsuario = new Button();
             btnModificarUsuario = new Button();
             grbListaClientes = new GroupBox();
-            btnEliminar = new Button();
             dgvClientes = new DataGridView();
             btnBuscarDni = new Button();
             txtBuscarClientes = new TextBox();
+            rbtInactivo = new RadioButton();
+            rbtActivo = new RadioButton();
+            rbtActivoFiltro = new RadioButton();
+            rbtInactivoFiltro = new RadioButton();
             grbDatosPersonales.SuspendLayout();
+            gpbEstado.SuspendLayout();
             grbListaClientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             SuspendLayout();
@@ -110,7 +115,7 @@
             // lblSexo
             // 
             lblSexo.AutoSize = true;
-            lblSexo.Location = new Point(445, 129);
+            lblSexo.Location = new Point(61, 179);
             lblSexo.Name = "lblSexo";
             lblSexo.Size = new Size(53, 25);
             lblSexo.TabIndex = 7;
@@ -119,7 +124,7 @@
             // cmbSexo
             // 
             cmbSexo.FormattingEnabled = true;
-            cmbSexo.Location = new Point(504, 126);
+            cmbSexo.Location = new Point(120, 176);
             cmbSexo.Name = "cmbSexo";
             cmbSexo.Size = new Size(67, 33);
             cmbSexo.TabIndex = 17;
@@ -143,6 +148,7 @@
             // grbDatosPersonales
             // 
             grbDatosPersonales.BackColor = SystemColors.Control;
+            grbDatosPersonales.Controls.Add(gpbEstado);
             grbDatosPersonales.Controls.Add(btnSalir);
             grbDatosPersonales.Controls.Add(lblTelefono);
             grbDatosPersonales.Controls.Add(txtTelefono);
@@ -164,10 +170,21 @@
             grbDatosPersonales.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             grbDatosPersonales.Location = new Point(12, 12);
             grbDatosPersonales.Name = "grbDatosPersonales";
-            grbDatosPersonales.Size = new Size(1294, 178);
+            grbDatosPersonales.Size = new Size(1294, 238);
             grbDatosPersonales.TabIndex = 21;
             grbDatosPersonales.TabStop = false;
             grbDatosPersonales.Text = "Datos Personales";
+            // 
+            // gpbEstado
+            // 
+            gpbEstado.Controls.Add(rbtActivo);
+            gpbEstado.Controls.Add(rbtInactivo);
+            gpbEstado.Location = new Point(924, 41);
+            gpbEstado.Name = "gpbEstado";
+            gpbEstado.Size = new Size(169, 125);
+            gpbEstado.TabIndex = 27;
+            gpbEstado.TabStop = false;
+            gpbEstado.Text = "Estado";
             // 
             // btnSalir
             // 
@@ -183,7 +200,7 @@
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
-            lblTelefono.Location = new Point(890, 38);
+            lblTelefono.Location = new Point(489, 126);
             lblTelefono.Name = "lblTelefono";
             lblTelefono.Size = new Size(86, 25);
             lblTelefono.TabIndex = 23;
@@ -191,7 +208,7 @@
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(982, 38);
+            txtTelefono.Location = new Point(581, 126);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(283, 31);
             txtTelefono.TabIndex = 24;
@@ -199,7 +216,7 @@
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(901, 83);
+            lblEmail.Location = new Point(500, 171);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(65, 25);
             lblEmail.TabIndex = 25;
@@ -207,7 +224,7 @@
             // 
             // txtMail
             // 
-            txtMail.Location = new Point(982, 80);
+            txtMail.Location = new Point(581, 168);
             txtMail.Name = "txtMail";
             txtMail.Size = new Size(283, 31);
             txtMail.TabIndex = 26;
@@ -232,7 +249,7 @@
             // 
             btnCrearUsuario.Anchor = AnchorStyles.None;
             btnCrearUsuario.BackColor = Color.PaleGreen;
-            btnCrearUsuario.Location = new Point(861, 22);
+            btnCrearUsuario.Location = new Point(1024, 22);
             btnCrearUsuario.Name = "btnCrearUsuario";
             btnCrearUsuario.Size = new Size(115, 39);
             btnCrearUsuario.TabIndex = 23;
@@ -244,7 +261,7 @@
             // 
             btnModificarUsuario.Anchor = AnchorStyles.None;
             btnModificarUsuario.BackColor = Color.Khaki;
-            btnModificarUsuario.Location = new Point(982, 22);
+            btnModificarUsuario.Location = new Point(1145, 22);
             btnModificarUsuario.Name = "btnModificarUsuario";
             btnModificarUsuario.Size = new Size(141, 39);
             btnModificarUsuario.TabIndex = 24;
@@ -254,31 +271,20 @@
             // 
             // grbListaClientes
             // 
-            grbListaClientes.Controls.Add(btnEliminar);
+            grbListaClientes.Controls.Add(rbtActivoFiltro);
             grbListaClientes.Controls.Add(btnModificarUsuario);
+            grbListaClientes.Controls.Add(rbtInactivoFiltro);
             grbListaClientes.Controls.Add(dgvClientes);
             grbListaClientes.Controls.Add(btnBuscarDni);
             grbListaClientes.Controls.Add(btnCrearUsuario);
             grbListaClientes.Controls.Add(txtBuscarClientes);
             grbListaClientes.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            grbListaClientes.Location = new Point(12, 196);
+            grbListaClientes.Location = new Point(12, 266);
             grbListaClientes.Name = "grbListaClientes";
             grbListaClientes.Size = new Size(1294, 513);
             grbListaClientes.TabIndex = 25;
             grbListaClientes.TabStop = false;
             grbListaClientes.Text = "Lista de Clientes";
-            // 
-            // btnEliminar
-            // 
-            btnEliminar.Anchor = AnchorStyles.None;
-            btnEliminar.BackColor = Color.LightCoral;
-            btnEliminar.Location = new Point(1129, 22);
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(146, 39);
-            btnEliminar.TabIndex = 25;
-            btnEliminar.Text = "Eliminar Usuario";
-            btnEliminar.UseVisualStyleBackColor = false;
-            btnEliminar.Click += btnEliminar_Click;
             // 
             // dgvClientes
             // 
@@ -311,11 +317,56 @@
             txtBuscarClientes.TabIndex = 12;
             txtBuscarClientes.TextChanged += txtBuscarClientes_TextChanged;
             // 
+            // rbtInactivo
+            // 
+            rbtInactivo.AutoSize = true;
+            rbtInactivo.Location = new Point(23, 81);
+            rbtInactivo.Name = "rbtInactivo";
+            rbtInactivo.Size = new Size(102, 29);
+            rbtInactivo.TabIndex = 0;
+            rbtInactivo.TabStop = true;
+            rbtInactivo.Text = "Inactivo";
+            rbtInactivo.UseVisualStyleBackColor = true;
+            rbtInactivo.CheckedChanged += radioButton1_CheckedChanged;
+            // 
+            // rbtActivo
+            // 
+            rbtActivo.AutoSize = true;
+            rbtActivo.Location = new Point(23, 38);
+            rbtActivo.Name = "rbtActivo";
+            rbtActivo.Size = new Size(88, 29);
+            rbtActivo.TabIndex = 1;
+            rbtActivo.TabStop = true;
+            rbtActivo.Text = "Activo";
+            rbtActivo.UseVisualStyleBackColor = true;
+            // 
+            // rbtActivoFiltro
+            // 
+            rbtActivoFiltro.AutoSize = true;
+            rbtActivoFiltro.Location = new Point(368, 31);
+            rbtActivoFiltro.Name = "rbtActivoFiltro";
+            rbtActivoFiltro.Size = new Size(88, 29);
+            rbtActivoFiltro.TabIndex = 3;
+            rbtActivoFiltro.TabStop = true;
+            rbtActivoFiltro.Text = "Activo";
+            rbtActivoFiltro.UseVisualStyleBackColor = true;
+            // 
+            // rbtInactivoFiltro
+            // 
+            rbtInactivoFiltro.AutoSize = true;
+            rbtInactivoFiltro.Location = new Point(473, 31);
+            rbtInactivoFiltro.Name = "rbtInactivoFiltro";
+            rbtInactivoFiltro.Size = new Size(102, 29);
+            rbtInactivoFiltro.TabIndex = 2;
+            rbtInactivoFiltro.TabStop = true;
+            rbtInactivoFiltro.Text = "Inactivo";
+            rbtInactivoFiltro.UseVisualStyleBackColor = true;
+            // 
             // frmClientes
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1318, 721);
+            ClientSize = new Size(1310, 803);
             Controls.Add(grbListaClientes);
             Controls.Add(grbDatosPersonales);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -325,6 +376,8 @@
             Load += frmClientes_Load;
             grbDatosPersonales.ResumeLayout(false);
             grbDatosPersonales.PerformLayout();
+            gpbEstado.ResumeLayout(false);
+            gpbEstado.PerformLayout();
             grbListaClientes.ResumeLayout(false);
             grbListaClientes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
@@ -352,11 +405,15 @@
         private TextBox txtBuscarClientes;
         private DateTimePicker dtpFechaIngreso;
         private Label lblFechaIngreso;
-        private Button btnEliminar;
         private Label lblTelefono;
         private TextBox txtTelefono;
         private Label lblEmail;
         private TextBox txtMail;
         private Button btnSalir;
+        private GroupBox gpbEstado;
+        private RadioButton rbtActivo;
+        private RadioButton rbtInactivo;
+        private RadioButton rbtActivoFiltro;
+        private RadioButton rbtInactivoFiltro;
     }
 }

@@ -10,7 +10,7 @@ namespace pryAccesoGym
     {
         public static class DatabaseHelper
         {
-            
+
             private static readonly string connectionString = "server=DESKTOP-19DBOAA\\SQLEXPRESS; database=dbGimnasio; integrated security=true; Encrypt=False;";
             //static string connectionString = "server=localhost; database=dbGimnasio; integrated security=true; Encrypt=False;";
 

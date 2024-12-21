@@ -161,9 +161,9 @@ namespace pryAccesoGym
                     MessageBox.Show("No se pudo registrar el pago.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                MessageBox.Show("Error al registrar el pago: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("      El DNI ingresado es Incorrecto    ");
             }
         }
         private void LimpiarCampos()

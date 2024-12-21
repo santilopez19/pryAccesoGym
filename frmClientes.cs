@@ -33,7 +33,7 @@ namespace pryAccesoGym
         {
             try
             {
-                string query = "SELECT * FROM Clientes ORDER BY Nombre ASC";
+                string query = "SELECT DNI, Nombre, Apellido, FechaNacimiento, Sexo, FechaIngreso, Telefono, Email, Estado FROM Clientes ORDER BY Nombre ASC";
                 DataTable dataTable = DatabaseHelper.ExecuteQuery(query);
                 dgvClientes.DataSource = dataTable;
             }
@@ -43,9 +43,9 @@ namespace pryAccesoGym
             }
         }
 
+
         private void btnCrearUsuario_Click(object sender, EventArgs e)
         {
-            
             if (string.IsNullOrWhiteSpace(txtDni.Text) || string.IsNullOrWhiteSpace(txtNombre.Text) ||
                 string.IsNullOrWhiteSpace(txtApellido.Text) || cmbSexo.SelectedItem == null ||
                 string.IsNullOrWhiteSpace(txtTelefono.Text) || string.IsNullOrWhiteSpace(txtMail.Text))
@@ -54,30 +54,32 @@ namespace pryAccesoGym
                 return;
             }
 
-            // Insertar el nuevo cliente
+            string estado = rbtActivo.Checked ? "Activo" : rbtInactivo.Checked ? "Inactivo" : "Activo";
+
             string query = @"
-    INSERT INTO Clientes (DNI, Nombre, Apellido, FechaNacimiento, Sexo, FechaIngreso, Telefono, Email)
-    VALUES (@DNI, @Nombre, @Apellido, @FechaNacimiento, @Sexo, @FechaIngreso, @Telefono, @Email)";
+        INSERT INTO Clientes (DNI, Nombre, Apellido, FechaNacimiento, Sexo, FechaIngreso, Telefono, Email, Estado)
+        VALUES (@DNI, @Nombre, @Apellido, @FechaNacimiento, @Sexo, @FechaIngreso, @Telefono, @Email, @Estado)";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-    new SqlParameter("@DNI", txtDni.Text.Trim()),
-    new SqlParameter("@Nombre", txtNombre.Text.Trim()),
-    new SqlParameter("@Apellido", txtApellido.Text.Trim()),
-    new SqlParameter("@FechaNacimiento", dtpFechaNac.Value),
-    new SqlParameter("@Sexo", cmbSexo.SelectedItem.ToString()),
-    new SqlParameter("@FechaIngreso", dtpFechaIngreso.Value),
-    new SqlParameter("@Telefono", txtTelefono.Text.Trim()),
-    new SqlParameter("@Email", txtMail.Text.Trim())
+        new SqlParameter("@DNI", txtDni.Text.Trim()),
+        new SqlParameter("@Nombre", txtNombre.Text.Trim()),
+        new SqlParameter("@Apellido", txtApellido.Text.Trim()),
+        new SqlParameter("@FechaNacimiento", dtpFechaNac.Value),
+        new SqlParameter("@Sexo", cmbSexo.SelectedItem.ToString()),
+        new SqlParameter("@FechaIngreso", dtpFechaIngreso.Value),
+        new SqlParameter("@Telefono", txtTelefono.Text.Trim()),
+        new SqlParameter("@Email", txtMail.Text.Trim()),
+        new SqlParameter("@Estado", estado)
             };
 
             DatabaseHelper.ExecuteNonQuery(query, parameters);
 
             MessageBox.Show("Cliente creado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            CargarClientes(); 
-            LimpiarCampos();  
-
+            CargarClientes();
+            LimpiarCampos();
         }
+
 
         private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -93,6 +95,8 @@ namespace pryAccesoGym
                 dtpFechaIngreso.Value = row.Cells["FechaIngreso"].Value != DBNull.Value ? Convert.ToDateTime(row.Cells["FechaIngreso"].Value) : DateTime.Now;
                 txtTelefono.Text = row.Cells["Telefono"].Value?.ToString() ?? ""; // Nuevo
                 txtMail.Text = row.Cells["Email"].Value?.ToString() ?? "";
+                dgvClientes.Columns["Estado"].HeaderText = "Estado";
+
             }
         }
 
@@ -104,8 +108,8 @@ namespace pryAccesoGym
             dtpFechaNac.Value = DateTime.Now;
             cmbSexo.SelectedIndex = -1;
             dtpFechaIngreso.Value = DateTime.Now;
-            txtTelefono.Clear(); 
-            txtMail.Clear();    
+            txtTelefono.Clear();
+            txtMail.Clear();
 
         }
 
@@ -113,41 +117,45 @@ namespace pryAccesoGym
         {
             cmbSexo.Items.Clear();
             cmbSexo.Items.Add("M");
-            cmbSexo.Items.Add("F"); 
-            cmbSexo.SelectedIndex = -1;
+            cmbSexo.Items.Add("F");
+            cmbSexo.SelectedIndex = -1; 
+            rbtActivo.Checked = true;
+            rbtActivoFiltro.Checked = true;
+
         }
 
         private void btnModificarUsuario_Click(object sender, EventArgs e)
         {
-            
+            string estado = rbtActivo.Checked ? "Activo" : rbtInactivo.Checked ? "Inactivo" : "Activo";
+
             string query = @"
-    UPDATE Clientes 
-    SET Nombre = @Nombre, Apellido = @Apellido, FechaNacimiento = @FechaNacimiento, 
-        Sexo = @Sexo, FechaIngreso = @FechaIngreso, Telefono = @Telefono, Email = @Email
-    WHERE DNI = @DNI";
+        UPDATE Clientes 
+        SET Nombre = @Nombre, Apellido = @Apellido, FechaNacimiento = @FechaNacimiento, 
+            Sexo = @Sexo, FechaIngreso = @FechaIngreso, Telefono = @Telefono, Email = @Email, Estado = @Estado
+        WHERE DNI = @DNI";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-    new SqlParameter("@DNI", txtDni.Text.Trim()),
-    new SqlParameter("@Nombre", txtNombre.Text.Trim()),
-    new SqlParameter("@Apellido", txtApellido.Text.Trim()),
-    new SqlParameter("@FechaNacimiento", dtpFechaNac.Value),
-    new SqlParameter("@Sexo", cmbSexo.SelectedItem.ToString()),
-    new SqlParameter("@FechaIngreso", dtpFechaIngreso.Value),
-    new SqlParameter("@Telefono", txtTelefono.Text.Trim()),
-    new SqlParameter("@Email", txtMail.Text.Trim())
+        new SqlParameter("@DNI", txtDni.Text.Trim()),
+        new SqlParameter("@Nombre", txtNombre.Text.Trim()),
+        new SqlParameter("@Apellido", txtApellido.Text.Trim()),
+        new SqlParameter("@FechaNacimiento", dtpFechaNac.Value),
+        new SqlParameter("@Sexo", cmbSexo.SelectedItem.ToString()),
+        new SqlParameter("@FechaIngreso", dtpFechaIngreso.Value),
+        new SqlParameter("@Telefono", txtTelefono.Text.Trim()),
+        new SqlParameter("@Email", txtMail.Text.Trim()),
+        new SqlParameter("@Estado", estado)
             };
 
             DatabaseHelper.ExecuteNonQuery(query, parameters);
 
             MessageBox.Show("Cliente modificado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            CargarClientes(); 
-            LimpiarCampos();  
-
-
+            CargarClientes();
+            LimpiarCampos();
         }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
+
+        /*private void btnEliminar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -197,6 +205,7 @@ namespace pryAccesoGym
                 MessageBox.Show("Error al eliminar el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        */
 
         private void cmbFiltrado_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -205,20 +214,20 @@ namespace pryAccesoGym
 
         private void txtBuscarClientes_TextChanged(object sender, EventArgs e)
         {
-            
+
             FiltrarClientes(txtBuscarClientes.Text.Trim());
         }
 
         private void btnBuscarDni_Click(object sender, EventArgs e)
         {
-           
+
             if (string.IsNullOrWhiteSpace(txtBuscarClientes.Text))
             {
                 CargarClientes();
             }
             else
             {
-                
+
                 FiltrarClientes(txtBuscarClientes.Text.Trim());
             }
         }
@@ -226,33 +235,30 @@ namespace pryAccesoGym
         {
             try
             {
-                
-                string query;
-                SqlParameter[] parameters;
+                string query = @"
+            SELECT DNI, Nombre, Apellido, FechaNacimiento, Sexo, FechaIngreso, Telefono, Email, Estado 
+            FROM Clientes 
+            WHERE (DNI LIKE @Filtro OR Nombre LIKE @Filtro)";
 
-                if (!string.IsNullOrEmpty(filtro))
+                List<SqlParameter> parameters = new List<SqlParameter>
+        {
+            new SqlParameter("@Filtro", "%" + filtro + "%")
+        };
+
+                if (rbtActivoFiltro.Checked)
                 {
-                    
-                    query = @"
-                SELECT * 
-                FROM Clientes 
-                WHERE DNI LIKE @Filtro OR Nombre LIKE @Filtro
-                ORDER BY Nombre ASC";
-
-                    parameters = new SqlParameter[]
-                    {
-                new SqlParameter("@Filtro", "%" + filtro + "%")
-                    };
+                    query += " AND Estado = @Estado";
+                    parameters.Add(new SqlParameter("@Estado", "Activo"));
                 }
-                else
+                else if (rbtInactivoFiltro.Checked)
                 {
-                    
-                    query = "SELECT * FROM Clientes ORDER BY Nombre ASC";
-                    parameters = null;
+                    query += " AND Estado = @Estado";
+                    parameters.Add(new SqlParameter("@Estado", "Inactivo"));
                 }
 
-                
-                DataTable dataTable = DatabaseHelper.ExecuteQuery(query, parameters);
+                query += " ORDER BY Nombre ASC";
+
+                DataTable dataTable = DatabaseHelper.ExecuteQuery(query, parameters.ToArray());
                 dgvClientes.DataSource = dataTable;
             }
             catch (Exception ex)
@@ -261,11 +267,17 @@ namespace pryAccesoGym
             }
         }
 
+
         private void btnSalir_Click(object sender, EventArgs e)
         {
             frmMenu frmMenu = new frmMenu();
             frmMenu.Show();
             this.Hide();
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
