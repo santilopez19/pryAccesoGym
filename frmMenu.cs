@@ -33,8 +33,6 @@ namespace pryAccesoGym
         {
             frmClientes frmClientes = new frmClientes();
             frmClientes.Show();
-            this.Hide();
-
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -53,7 +51,6 @@ namespace pryAccesoGym
         {
             frmIngreso frmIngreso = new frmIngreso();
             frmIngreso.Show();
-            this.Hide();
         }
 
         private void frmMenu_Load(object sender, EventArgs e)
@@ -446,7 +443,6 @@ namespace pryAccesoGym
         {
             frmAnuncio frmAnuncio = new frmAnuncio();
             frmAnuncio.Show();
-            this.Hide();
         }
     }
 }

@@ -76,11 +76,7 @@ namespace pryAccesoGym
         }
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            frmMenu frmMenu = new frmMenu();
-            frmMenu.Show();
             this.Hide();
         }
-
-        
     }
 }

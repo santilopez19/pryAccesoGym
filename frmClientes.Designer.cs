@@ -40,7 +40,10 @@
             lblFechaNac = new Label();
             dtpFechaNac = new DateTimePicker();
             grbDatosPersonales = new GroupBox();
+            button1 = new Button();
             gpbEstado = new GroupBox();
+            rbtActivo = new RadioButton();
+            rbtInactivo = new RadioButton();
             btnSalir = new Button();
             lblTelefono = new Label();
             txtTelefono = new TextBox();
@@ -51,13 +54,11 @@
             btnCrearUsuario = new Button();
             btnModificarUsuario = new Button();
             grbListaClientes = new GroupBox();
+            rbtActivoFiltro = new RadioButton();
+            rbtInactivoFiltro = new RadioButton();
             dgvClientes = new DataGridView();
             btnBuscarDni = new Button();
             txtBuscarClientes = new TextBox();
-            rbtInactivo = new RadioButton();
-            rbtActivo = new RadioButton();
-            rbtActivoFiltro = new RadioButton();
-            rbtInactivoFiltro = new RadioButton();
             grbDatosPersonales.SuspendLayout();
             gpbEstado.SuspendLayout();
             grbListaClientes.SuspendLayout();
@@ -148,6 +149,7 @@
             // grbDatosPersonales
             // 
             grbDatosPersonales.BackColor = SystemColors.Control;
+            grbDatosPersonales.Controls.Add(button1);
             grbDatosPersonales.Controls.Add(gpbEstado);
             grbDatosPersonales.Controls.Add(btnSalir);
             grbDatosPersonales.Controls.Add(lblTelefono);
@@ -175,6 +177,18 @@
             grbDatosPersonales.TabStop = false;
             grbDatosPersonales.Text = "Datos Personales";
             // 
+            // button1
+            // 
+            button1.BackColor = Color.Gold;
+            button1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.Location = new Point(1183, 0);
+            button1.Name = "button1";
+            button1.Size = new Size(103, 35);
+            button1.TabIndex = 28;
+            button1.Text = "Volver";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // gpbEstado
             // 
             gpbEstado.Controls.Add(rbtActivo);
@@ -186,6 +200,29 @@
             gpbEstado.TabStop = false;
             gpbEstado.Text = "Estado";
             // 
+            // rbtActivo
+            // 
+            rbtActivo.AutoSize = true;
+            rbtActivo.Location = new Point(23, 38);
+            rbtActivo.Name = "rbtActivo";
+            rbtActivo.Size = new Size(88, 29);
+            rbtActivo.TabIndex = 1;
+            rbtActivo.TabStop = true;
+            rbtActivo.Text = "Activo";
+            rbtActivo.UseVisualStyleBackColor = true;
+            // 
+            // rbtInactivo
+            // 
+            rbtInactivo.AutoSize = true;
+            rbtInactivo.Location = new Point(23, 81);
+            rbtInactivo.Name = "rbtInactivo";
+            rbtInactivo.Size = new Size(102, 29);
+            rbtInactivo.TabIndex = 0;
+            rbtInactivo.TabStop = true;
+            rbtInactivo.Text = "Inactivo";
+            rbtInactivo.UseVisualStyleBackColor = true;
+            rbtInactivo.CheckedChanged += radioButton1_CheckedChanged;
+            // 
             // btnSalir
             // 
             btnSalir.BackColor = Color.Gold;
@@ -195,7 +232,6 @@
             btnSalir.TabIndex = 26;
             btnSalir.Text = "Volver";
             btnSalir.UseVisualStyleBackColor = false;
-            btnSalir.Click += btnSalir_Click;
             // 
             // lblTelefono
             // 
@@ -286,9 +322,33 @@
             grbListaClientes.TabStop = false;
             grbListaClientes.Text = "Lista de Clientes";
             // 
+            // rbtActivoFiltro
+            // 
+            rbtActivoFiltro.AutoSize = true;
+            rbtActivoFiltro.Location = new Point(368, 31);
+            rbtActivoFiltro.Name = "rbtActivoFiltro";
+            rbtActivoFiltro.Size = new Size(88, 29);
+            rbtActivoFiltro.TabIndex = 3;
+            rbtActivoFiltro.TabStop = true;
+            rbtActivoFiltro.Text = "Activo";
+            rbtActivoFiltro.UseVisualStyleBackColor = true;
+            // 
+            // rbtInactivoFiltro
+            // 
+            rbtInactivoFiltro.AutoSize = true;
+            rbtInactivoFiltro.Location = new Point(473, 31);
+            rbtInactivoFiltro.Name = "rbtInactivoFiltro";
+            rbtInactivoFiltro.Size = new Size(102, 29);
+            rbtInactivoFiltro.TabIndex = 2;
+            rbtInactivoFiltro.TabStop = true;
+            rbtInactivoFiltro.Text = "Inactivo";
+            rbtInactivoFiltro.UseVisualStyleBackColor = true;
+            // 
             // dgvClientes
             // 
             dgvClientes.AllowUserToAddRows = false;
+            dgvClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvClientes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvClientes.Location = new Point(9, 69);
             dgvClientes.Name = "dgvClientes";
@@ -316,51 +376,6 @@
             txtBuscarClientes.Size = new Size(204, 31);
             txtBuscarClientes.TabIndex = 12;
             txtBuscarClientes.TextChanged += txtBuscarClientes_TextChanged;
-            // 
-            // rbtInactivo
-            // 
-            rbtInactivo.AutoSize = true;
-            rbtInactivo.Location = new Point(23, 81);
-            rbtInactivo.Name = "rbtInactivo";
-            rbtInactivo.Size = new Size(102, 29);
-            rbtInactivo.TabIndex = 0;
-            rbtInactivo.TabStop = true;
-            rbtInactivo.Text = "Inactivo";
-            rbtInactivo.UseVisualStyleBackColor = true;
-            rbtInactivo.CheckedChanged += radioButton1_CheckedChanged;
-            // 
-            // rbtActivo
-            // 
-            rbtActivo.AutoSize = true;
-            rbtActivo.Location = new Point(23, 38);
-            rbtActivo.Name = "rbtActivo";
-            rbtActivo.Size = new Size(88, 29);
-            rbtActivo.TabIndex = 1;
-            rbtActivo.TabStop = true;
-            rbtActivo.Text = "Activo";
-            rbtActivo.UseVisualStyleBackColor = true;
-            // 
-            // rbtActivoFiltro
-            // 
-            rbtActivoFiltro.AutoSize = true;
-            rbtActivoFiltro.Location = new Point(368, 31);
-            rbtActivoFiltro.Name = "rbtActivoFiltro";
-            rbtActivoFiltro.Size = new Size(88, 29);
-            rbtActivoFiltro.TabIndex = 3;
-            rbtActivoFiltro.TabStop = true;
-            rbtActivoFiltro.Text = "Activo";
-            rbtActivoFiltro.UseVisualStyleBackColor = true;
-            // 
-            // rbtInactivoFiltro
-            // 
-            rbtInactivoFiltro.AutoSize = true;
-            rbtInactivoFiltro.Location = new Point(473, 31);
-            rbtInactivoFiltro.Name = "rbtInactivoFiltro";
-            rbtInactivoFiltro.Size = new Size(102, 29);
-            rbtInactivoFiltro.TabIndex = 2;
-            rbtInactivoFiltro.TabStop = true;
-            rbtInactivoFiltro.Text = "Inactivo";
-            rbtInactivoFiltro.UseVisualStyleBackColor = true;
             // 
             // frmClientes
             // 
@@ -415,5 +430,6 @@
         private RadioButton rbtInactivo;
         private RadioButton rbtActivoFiltro;
         private RadioButton rbtInactivoFiltro;
+        private Button button1;
     }
 }

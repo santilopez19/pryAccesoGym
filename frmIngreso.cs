@@ -52,8 +52,6 @@ namespace pryAccesoGym
         {
             if (e.KeyCode == Keys.Escape)
             {
-                frmMenu frmMenu = new frmMenu();
-                frmMenu.Show();
                 this.Hide();
             }
         }

@@ -118,7 +118,7 @@ namespace pryAccesoGym
             cmbSexo.Items.Clear();
             cmbSexo.Items.Add("M");
             cmbSexo.Items.Add("F");
-            cmbSexo.SelectedIndex = -1; 
+            cmbSexo.SelectedIndex = -1;
             rbtActivo.Checked = true;
             rbtActivoFiltro.Checked = true;
 
@@ -267,17 +267,14 @@ namespace pryAccesoGym
             }
         }
 
-
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            frmMenu frmMenu = new frmMenu();
-            frmMenu.Show();
-            this.Hide();
-        }
-
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

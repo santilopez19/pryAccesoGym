@@ -6,12 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>kettlebell_equipment_gym_fitness_icon_224876.ico</ApplicationIcon>
-    <AssemblyName>SisGym</AssemblyName>
+    <ApplicationIcon>image-removebg-preview-_1_.ico</ApplicationIcon>
+    <AssemblyName>Gym En Forma</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="kettlebell_equipment_gym_fitness_icon_224876.ico" />
+    <Content Include="image-removebg-preview-_1_.ico" />
   </ItemGroup>
 
   <ItemGroup>
