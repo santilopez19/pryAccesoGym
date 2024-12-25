@@ -1,6 +1,4 @@
-﻿using System;
-using System.Data;
-using System.Windows.Forms;
+﻿using System.Data;
 using Microsoft.Data.SqlClient;
 using static pryAccesoGym.bdGimnasio;
 

@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
-using System.Windows.Forms;
+﻿using System.Data;
 using static pryAccesoGym.bdGimnasio;
-using static System.Windows.Forms.DataFormats;
 using Microsoft.Data.SqlClient;
 using System.IO.Ports;
 
@@ -24,8 +14,6 @@ namespace pryAccesoGym
             this.KeyPreview = true;
             this.KeyDown += VolverPagina_KeyDown;
             this.KeyDown += EnterKey_KeyDown;
-
-
         }
         private void EnterKey_KeyDown(object sender, KeyEventArgs e)
         {
@@ -36,11 +24,6 @@ namespace pryAccesoGym
                 e.SuppressKeyPress = true;
             }
             txtDniIngreso.Focus();
-        }
-
-        private void lblAvisoIngreso_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void frmIngreso_Load(object sender, EventArgs e)
@@ -180,10 +163,6 @@ namespace pryAccesoGym
             {
                 MessageBox.Show("Error al cargar el anuncio: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-        private void txtDniIngreso_TextChanged(object sender, EventArgs e)
-        {
-
         }
         private void tLbl_Tick(object sender, EventArgs e)
         {
