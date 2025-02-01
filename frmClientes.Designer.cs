@@ -68,88 +68,92 @@
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(19, 41);
+            lblNombre.Location = new Point(17, 31);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(81, 25);
+            lblNombre.Size = new Size(86, 25);
             lblNombre.TabIndex = 0;
             lblNombre.Text = "Nombre";
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(119, 41);
+            txtNombre.Location = new Point(104, 31);
+            txtNombre.Margin = new Padding(3, 2, 3, 2);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(283, 31);
+            txtNombre.Size = new Size(248, 33);
             txtNombre.TabIndex = 2;
             // 
             // txtApellido
             // 
-            txtApellido.Location = new Point(119, 83);
+            txtApellido.Location = new Point(104, 68);
+            txtApellido.Margin = new Padding(3, 2, 3, 2);
             txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(283, 31);
+            txtApellido.Size = new Size(248, 33);
             txtApellido.TabIndex = 4;
             // 
             // lblApellido
             // 
             lblApellido.AutoSize = true;
-            lblApellido.Location = new Point(22, 86);
+            lblApellido.Location = new Point(17, 71);
             lblApellido.Name = "lblApellido";
-            lblApellido.Size = new Size(83, 25);
+            lblApellido.Size = new Size(86, 25);
             lblApellido.TabIndex = 3;
             lblApellido.Text = "Apellido";
             // 
             // txtDni
             // 
-            txtDni.Location = new Point(119, 129);
+            txtDni.Location = new Point(104, 103);
+            txtDni.Margin = new Padding(3, 2, 3, 2);
             txtDni.Name = "txtDni";
-            txtDni.Size = new Size(283, 31);
+            txtDni.Size = new Size(248, 33);
             txtDni.TabIndex = 6;
             // 
             // lblDni
             // 
             lblDni.AutoSize = true;
-            lblDni.Location = new Point(22, 132);
+            lblDni.Location = new Point(17, 106);
             lblDni.Name = "lblDni";
-            lblDni.Size = new Size(45, 25);
+            lblDni.Size = new Size(47, 25);
             lblDni.TabIndex = 5;
             lblDni.Text = "DNI";
             // 
             // lblSexo
             // 
             lblSexo.AutoSize = true;
-            lblSexo.Location = new Point(61, 179);
+            lblSexo.Location = new Point(47, 162);
             lblSexo.Name = "lblSexo";
-            lblSexo.Size = new Size(53, 25);
+            lblSexo.Size = new Size(56, 25);
             lblSexo.TabIndex = 7;
             lblSexo.Text = "Sexo";
             // 
             // cmbSexo
             // 
             cmbSexo.FormattingEnabled = true;
-            cmbSexo.Location = new Point(120, 176);
+            cmbSexo.Location = new Point(99, 160);
+            cmbSexo.Margin = new Padding(3, 2, 3, 2);
             cmbSexo.Name = "cmbSexo";
-            cmbSexo.Size = new Size(67, 33);
+            cmbSexo.Size = new Size(59, 33);
             cmbSexo.TabIndex = 17;
             // 
             // lblFechaNac
             // 
             lblFechaNac.AutoSize = true;
-            lblFechaNac.Location = new Point(445, 83);
+            lblFechaNac.Location = new Point(391, 79);
             lblFechaNac.Name = "lblFechaNac";
-            lblFechaNac.Size = new Size(130, 25);
+            lblFechaNac.Size = new Size(133, 25);
             lblFechaNac.TabIndex = 18;
             lblFechaNac.Text = "Fecha de Nac.";
             // 
             // dtpFechaNac
             // 
-            dtpFechaNac.Location = new Point(581, 80);
+            dtpFechaNac.Location = new Point(532, 77);
+            dtpFechaNac.Margin = new Padding(3, 2, 3, 2);
             dtpFechaNac.Name = "dtpFechaNac";
-            dtpFechaNac.Size = new Size(268, 31);
+            dtpFechaNac.Size = new Size(235, 33);
             dtpFechaNac.TabIndex = 19;
             // 
             // grbDatosPersonales
             // 
             grbDatosPersonales.BackColor = SystemColors.Control;
-            grbDatosPersonales.Controls.Add(button1);
             grbDatosPersonales.Controls.Add(gpbEstado);
             grbDatosPersonales.Controls.Add(btnSalir);
             grbDatosPersonales.Controls.Add(lblTelefono);
@@ -169,10 +173,12 @@
             grbDatosPersonales.Controls.Add(txtDni);
             grbDatosPersonales.Controls.Add(lblSexo);
             grbDatosPersonales.FlatStyle = FlatStyle.System;
-            grbDatosPersonales.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            grbDatosPersonales.Location = new Point(12, 12);
+            grbDatosPersonales.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            grbDatosPersonales.Location = new Point(12, 18);
+            grbDatosPersonales.Margin = new Padding(3, 2, 3, 2);
             grbDatosPersonales.Name = "grbDatosPersonales";
-            grbDatosPersonales.Size = new Size(1294, 238);
+            grbDatosPersonales.Padding = new Padding(3, 2, 3, 2);
+            grbDatosPersonales.Size = new Size(1253, 214);
             grbDatosPersonales.TabIndex = 21;
             grbDatosPersonales.TabStop = false;
             grbDatosPersonales.Text = "Datos Personales";
@@ -180,10 +186,11 @@
             // button1
             // 
             button1.BackColor = Color.Gold;
-            button1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            button1.Location = new Point(1183, 0);
+            button1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.Location = new Point(1180, 7);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(103, 35);
+            button1.Size = new Size(90, 37);
             button1.TabIndex = 28;
             button1.Text = "Volver";
             button1.UseVisualStyleBackColor = false;
@@ -193,9 +200,11 @@
             // 
             gpbEstado.Controls.Add(rbtActivo);
             gpbEstado.Controls.Add(rbtInactivo);
-            gpbEstado.Location = new Point(924, 41);
+            gpbEstado.Location = new Point(898, 36);
+            gpbEstado.Margin = new Padding(3, 2, 3, 2);
             gpbEstado.Name = "gpbEstado";
-            gpbEstado.Size = new Size(169, 125);
+            gpbEstado.Padding = new Padding(3, 2, 3, 2);
+            gpbEstado.Size = new Size(148, 94);
             gpbEstado.TabIndex = 27;
             gpbEstado.TabStop = false;
             gpbEstado.Text = "Estado";
@@ -203,9 +212,10 @@
             // rbtActivo
             // 
             rbtActivo.AutoSize = true;
-            rbtActivo.Location = new Point(23, 38);
+            rbtActivo.Location = new Point(20, 28);
+            rbtActivo.Margin = new Padding(3, 2, 3, 2);
             rbtActivo.Name = "rbtActivo";
-            rbtActivo.Size = new Size(88, 29);
+            rbtActivo.Size = new Size(86, 29);
             rbtActivo.TabIndex = 1;
             rbtActivo.TabStop = true;
             rbtActivo.Text = "Activo";
@@ -214,9 +224,10 @@
             // rbtInactivo
             // 
             rbtInactivo.AutoSize = true;
-            rbtInactivo.Location = new Point(23, 81);
+            rbtInactivo.Location = new Point(20, 61);
+            rbtInactivo.Margin = new Padding(3, 2, 3, 2);
             rbtInactivo.Name = "rbtInactivo";
-            rbtInactivo.Size = new Size(102, 29);
+            rbtInactivo.Size = new Size(101, 29);
             rbtInactivo.TabIndex = 0;
             rbtInactivo.TabStop = true;
             rbtInactivo.Text = "Inactivo";
@@ -226,9 +237,10 @@
             // btnSalir
             // 
             btnSalir.BackColor = Color.Gold;
-            btnSalir.Location = new Point(1454, 0);
+            btnSalir.Location = new Point(1272, 0);
+            btnSalir.Margin = new Padding(3, 2, 3, 2);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(103, 35);
+            btnSalir.Size = new Size(90, 26);
             btnSalir.TabIndex = 26;
             btnSalir.Text = "Volver";
             btnSalir.UseVisualStyleBackColor = false;
@@ -236,48 +248,51 @@
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
-            lblTelefono.Location = new Point(489, 126);
+            lblTelefono.Location = new Point(413, 134);
             lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(86, 25);
+            lblTelefono.Size = new Size(89, 25);
             lblTelefono.TabIndex = 23;
             lblTelefono.Text = "Teléfono";
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(581, 126);
+            txtTelefono.Location = new Point(508, 132);
+            txtTelefono.Margin = new Padding(3, 2, 3, 2);
             txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(283, 31);
+            txtTelefono.Size = new Size(248, 33);
             txtTelefono.TabIndex = 24;
             // 
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(500, 171);
+            lblEmail.Location = new Point(428, 171);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(65, 25);
+            lblEmail.Size = new Size(67, 25);
             lblEmail.TabIndex = 25;
             lblEmail.Text = "E-mail";
             // 
             // txtMail
             // 
-            txtMail.Location = new Point(581, 168);
+            txtMail.Location = new Point(508, 171);
+            txtMail.Margin = new Padding(3, 2, 3, 2);
             txtMail.Name = "txtMail";
-            txtMail.Size = new Size(283, 31);
+            txtMail.Size = new Size(248, 33);
             txtMail.TabIndex = 26;
             // 
             // dtpFechaIngreso
             // 
-            dtpFechaIngreso.Location = new Point(581, 38);
+            dtpFechaIngreso.Location = new Point(530, 28);
+            dtpFechaIngreso.Margin = new Padding(3, 2, 3, 2);
             dtpFechaIngreso.Name = "dtpFechaIngreso";
-            dtpFechaIngreso.Size = new Size(268, 31);
+            dtpFechaIngreso.Size = new Size(235, 33);
             dtpFechaIngreso.TabIndex = 22;
             // 
             // lblFechaIngreso
             // 
             lblFechaIngreso.AutoSize = true;
-            lblFechaIngreso.Location = new Point(445, 41);
+            lblFechaIngreso.Location = new Point(389, 31);
             lblFechaIngreso.Name = "lblFechaIngreso";
-            lblFechaIngreso.Size = new Size(130, 25);
+            lblFechaIngreso.Size = new Size(135, 25);
             lblFechaIngreso.TabIndex = 21;
             lblFechaIngreso.Text = "Fecha Ingreso";
             // 
@@ -285,9 +300,10 @@
             // 
             btnCrearUsuario.Anchor = AnchorStyles.None;
             btnCrearUsuario.BackColor = Color.PaleGreen;
-            btnCrearUsuario.Location = new Point(1024, 22);
+            btnCrearUsuario.Location = new Point(1024, 27);
+            btnCrearUsuario.Margin = new Padding(3, 2, 3, 2);
             btnCrearUsuario.Name = "btnCrearUsuario";
-            btnCrearUsuario.Size = new Size(115, 39);
+            btnCrearUsuario.Size = new Size(101, 37);
             btnCrearUsuario.TabIndex = 23;
             btnCrearUsuario.Text = "Crear Usuario";
             btnCrearUsuario.UseVisualStyleBackColor = false;
@@ -297,9 +313,10 @@
             // 
             btnModificarUsuario.Anchor = AnchorStyles.None;
             btnModificarUsuario.BackColor = Color.Khaki;
-            btnModificarUsuario.Location = new Point(1145, 22);
+            btnModificarUsuario.Location = new Point(1130, 27);
+            btnModificarUsuario.Margin = new Padding(3, 2, 3, 2);
             btnModificarUsuario.Name = "btnModificarUsuario";
-            btnModificarUsuario.Size = new Size(141, 39);
+            btnModificarUsuario.Size = new Size(123, 37);
             btnModificarUsuario.TabIndex = 24;
             btnModificarUsuario.Text = "Modificar Usuario";
             btnModificarUsuario.UseVisualStyleBackColor = false;
@@ -314,10 +331,12 @@
             grbListaClientes.Controls.Add(btnBuscarDni);
             grbListaClientes.Controls.Add(btnCrearUsuario);
             grbListaClientes.Controls.Add(txtBuscarClientes);
-            grbListaClientes.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            grbListaClientes.Location = new Point(12, 266);
+            grbListaClientes.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            grbListaClientes.Location = new Point(12, 236);
+            grbListaClientes.Margin = new Padding(3, 2, 3, 2);
             grbListaClientes.Name = "grbListaClientes";
-            grbListaClientes.Size = new Size(1294, 513);
+            grbListaClientes.Padding = new Padding(3, 2, 3, 2);
+            grbListaClientes.Size = new Size(1258, 419);
             grbListaClientes.TabIndex = 25;
             grbListaClientes.TabStop = false;
             grbListaClientes.Text = "Lista de Clientes";
@@ -325,9 +344,10 @@
             // rbtActivoFiltro
             // 
             rbtActivoFiltro.AutoSize = true;
-            rbtActivoFiltro.Location = new Point(368, 31);
+            rbtActivoFiltro.Location = new Point(322, 52);
+            rbtActivoFiltro.Margin = new Padding(3, 2, 3, 2);
             rbtActivoFiltro.Name = "rbtActivoFiltro";
-            rbtActivoFiltro.Size = new Size(88, 29);
+            rbtActivoFiltro.Size = new Size(86, 29);
             rbtActivoFiltro.TabIndex = 3;
             rbtActivoFiltro.TabStop = true;
             rbtActivoFiltro.Text = "Activo";
@@ -336,9 +356,10 @@
             // rbtInactivoFiltro
             // 
             rbtInactivoFiltro.AutoSize = true;
-            rbtInactivoFiltro.Location = new Point(473, 31);
+            rbtInactivoFiltro.Location = new Point(414, 52);
+            rbtInactivoFiltro.Margin = new Padding(3, 2, 3, 2);
             rbtInactivoFiltro.Name = "rbtInactivoFiltro";
-            rbtInactivoFiltro.Size = new Size(102, 29);
+            rbtInactivoFiltro.Size = new Size(101, 29);
             rbtInactivoFiltro.TabIndex = 2;
             rbtInactivoFiltro.TabStop = true;
             rbtInactivoFiltro.Text = "Inactivo";
@@ -350,20 +371,22 @@
             dgvClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvClientes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientes.Location = new Point(9, 69);
+            dgvClientes.Location = new Point(7, 87);
+            dgvClientes.Margin = new Padding(3, 2, 3, 2);
             dgvClientes.Name = "dgvClientes";
             dgvClientes.RowHeadersWidth = 51;
             dgvClientes.RowTemplate.Height = 29;
-            dgvClientes.Size = new Size(1279, 438);
+            dgvClientes.Size = new Size(1246, 328);
             dgvClientes.TabIndex = 7;
             dgvClientes.CellClick += dgvClientes_CellClick;
             dgvClientes.CellContentClick += dgvClientes_CellClick;
             // 
             // btnBuscarDni
             // 
-            btnBuscarDni.Location = new Point(219, 28);
+            btnBuscarDni.Location = new Point(204, 49);
+            btnBuscarDni.Margin = new Padding(3, 2, 3, 2);
             btnBuscarDni.Name = "btnBuscarDni";
-            btnBuscarDni.Size = new Size(113, 35);
+            btnBuscarDni.Size = new Size(99, 34);
             btnBuscarDni.TabIndex = 6;
             btnBuscarDni.Text = "Buscar";
             btnBuscarDni.UseVisualStyleBackColor = true;
@@ -371,20 +394,23 @@
             // 
             // txtBuscarClientes
             // 
-            txtBuscarClientes.Location = new Point(9, 30);
+            txtBuscarClientes.Location = new Point(7, 50);
+            txtBuscarClientes.Margin = new Padding(3, 2, 3, 2);
             txtBuscarClientes.Name = "txtBuscarClientes";
-            txtBuscarClientes.Size = new Size(204, 31);
+            txtBuscarClientes.Size = new Size(191, 33);
             txtBuscarClientes.TabIndex = 12;
             txtBuscarClientes.TextChanged += txtBuscarClientes_TextChanged;
             // 
             // frmClientes
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1310, 803);
+            ClientSize = new Size(1280, 666);
+            Controls.Add(button1);
             Controls.Add(grbListaClientes);
             Controls.Add(grbDatosPersonales);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "frmClientes";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Clientes";

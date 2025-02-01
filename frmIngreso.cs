@@ -102,7 +102,7 @@ namespace pryAccesoGym
                 }
                 else if (DateTime.Now >= fechaProximoPago)
                 {
-                    lblAvisoIngreso.Text = $"{nombreCliente}, su cuota venció el {fechaProximoPago:dd/MM/yyyy}.";
+                    lblAvisoIngreso.Text = $"{nombreCliente}, su cuota venció el {fechaProximoPago:dd/MM/yyyy}. Comunicarse con Administración";
                     lblAvisoIngreso.ForeColor = Color.Red;
                 }
                 else

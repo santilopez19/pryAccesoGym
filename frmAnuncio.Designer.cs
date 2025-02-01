@@ -42,10 +42,11 @@
             // btnSalir
             // 
             btnSalir.BackColor = Color.Gold;
-            btnSalir.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            btnSalir.Location = new Point(982, 12);
+            btnSalir.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnSalir.Location = new Point(859, 9);
+            btnSalir.Margin = new Padding(3, 2, 3, 2);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(103, 35);
+            btnSalir.Size = new Size(97, 44);
             btnSalir.TabIndex = 27;
             btnSalir.Text = "Volver";
             btnSalir.UseVisualStyleBackColor = false;
@@ -53,21 +54,23 @@
             // 
             // txtAnuncio
             // 
-            txtAnuncio.Font = new Font("Arial Rounded MT Bold", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            txtAnuncio.Location = new Point(74, 53);
+            txtAnuncio.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
+            txtAnuncio.Location = new Point(65, 40);
+            txtAnuncio.Margin = new Padding(3, 2, 3, 2);
             txtAnuncio.Multiline = true;
             txtAnuncio.Name = "txtAnuncio";
-            txtAnuncio.Size = new Size(527, 461);
+            txtAnuncio.Size = new Size(462, 347);
             txtAnuncio.TabIndex = 28;
             txtAnuncio.TextAlign = HorizontalAlignment.Center;
             // 
             // btnGuardarCambios
             // 
             btnGuardarCambios.BackColor = Color.PaleGreen;
-            btnGuardarCambios.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            btnGuardarCambios.Location = new Point(650, 245);
+            btnGuardarCambios.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnGuardarCambios.Location = new Point(569, 184);
+            btnGuardarCambios.Margin = new Padding(3, 2, 3, 2);
             btnGuardarCambios.Name = "btnGuardarCambios";
-            btnGuardarCambios.Size = new Size(214, 35);
+            btnGuardarCambios.Size = new Size(194, 44);
             btnGuardarCambios.TabIndex = 30;
             btnGuardarCambios.Text = "Guardar Cambios";
             btnGuardarCambios.UseVisualStyleBackColor = false;
@@ -76,9 +79,10 @@
             // rbtRojo
             // 
             rbtRojo.AutoSize = true;
-            rbtRojo.Location = new Point(27, 75);
+            rbtRojo.Location = new Point(24, 56);
+            rbtRojo.Margin = new Padding(3, 2, 3, 2);
             rbtRojo.Name = "rbtRojo";
-            rbtRojo.Size = new Size(72, 29);
+            rbtRojo.Size = new Size(71, 29);
             rbtRojo.TabIndex = 32;
             rbtRojo.TabStop = true;
             rbtRojo.Text = "Rojo";
@@ -87,9 +91,10 @@
             // rbtAzul
             // 
             rbtAzul.AutoSize = true;
-            rbtAzul.Location = new Point(27, 39);
+            rbtAzul.Location = new Point(24, 29);
+            rbtAzul.Margin = new Padding(3, 2, 3, 2);
             rbtAzul.Name = "rbtAzul";
-            rbtAzul.Size = new Size(71, 29);
+            rbtAzul.Size = new Size(69, 29);
             rbtAzul.TabIndex = 31;
             rbtAzul.TabStop = true;
             rbtAzul.Text = "Azul";
@@ -100,10 +105,12 @@
             grbColores.Controls.Add(rbtNegro);
             grbColores.Controls.Add(rbtAzul);
             grbColores.Controls.Add(rbtRojo);
-            grbColores.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            grbColores.Location = new Point(650, 53);
+            grbColores.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            grbColores.Location = new Point(569, 40);
+            grbColores.Margin = new Padding(3, 2, 3, 2);
             grbColores.Name = "grbColores";
-            grbColores.Size = new Size(302, 164);
+            grbColores.Padding = new Padding(3, 2, 3, 2);
+            grbColores.Size = new Size(271, 141);
             grbColores.TabIndex = 33;
             grbColores.TabStop = false;
             grbColores.Text = "Colores";
@@ -111,9 +118,10 @@
             // rbtNegro
             // 
             rbtNegro.AutoSize = true;
-            rbtNegro.Location = new Point(26, 110);
+            rbtNegro.Location = new Point(23, 82);
+            rbtNegro.Margin = new Padding(3, 2, 3, 2);
             rbtNegro.Name = "rbtNegro";
-            rbtNegro.Size = new Size(86, 29);
+            rbtNegro.Size = new Size(87, 29);
             rbtNegro.TabIndex = 33;
             rbtNegro.TabStop = true;
             rbtNegro.Text = "Negro";
@@ -121,14 +129,15 @@
             // 
             // frmAnuncio
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1097, 557);
+            ClientSize = new Size(960, 418);
             Controls.Add(grbColores);
             Controls.Add(btnGuardarCambios);
             Controls.Add(txtAnuncio);
             Controls.Add(btnSalir);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "frmAnuncio";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Anuncio";

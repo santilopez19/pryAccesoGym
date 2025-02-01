@@ -46,30 +46,39 @@ namespace pryAccesoGym
             {
                 string query = @"
         SELECT 
+            c.Nombre AS 'Nombre',
+            p.DNI AS 'Documento',
+            c.Estado AS 'Activo',
             p.PagoID AS 'PagoID',
-            p.DNI AS 'Documento', 
-            c.Nombre AS 'Nombre', 
-            c.Apellido AS 'Apellido', 
-            p.Monto AS 'Monto Pagado', 
-            p.MetodoPago AS 'Método de Pago', 
+            c.Apellido AS 'Apellido',
+            p.Monto AS 'Monto Pagado',
+            p.MetodoPago AS 'Método de Pago',
             p.FechaPago AS 'Fecha de Pago'
         FROM 
             Pagos p
-        JOIN 
-            Clientes c 
-        ON 
-            p.DNI = c.DNI
+        INNER JOIN 
+            Clientes c ON p.DNI = c.DNI
         ORDER BY 
             p.FechaPago DESC";
 
                 DataTable dataTable = DatabaseHelper.ExecuteQuery(query);
-                dgvClientes.DataSource = dataTable;
+
+                if (dgvClientes != null)
+                {
+                    dgvClientes.DataSource = dataTable;
+                }
+                else
+                {
+                    MessageBox.Show("Error: El DataGridView no está inicializado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar los pagos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
 
         private void btnCargarPago_Click(object sender, EventArgs e)
@@ -120,7 +129,7 @@ namespace pryAccesoGym
                     MessageBox.Show("No se pudo registrar el pago.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
                 MessageBox.Show("      El DNI ingresado es Incorrecto    ");
             }
@@ -157,21 +166,22 @@ namespace pryAccesoGym
 
                 // Definir la consulta dinámica según el criterio
                 string query = @"
-            SELECT 
-                p.PagoID AS 'PagoID',
-                p.DNI AS 'Documento', 
-                c.Nombre AS 'Nombre', 
-                c.Apellido AS 'Apellido', 
-                p.Monto AS 'Monto Pagado', 
-                p.MetodoPago AS 'Método de Pago', 
-                p.FechaPago AS 'Fecha de Pago' 
-            FROM 
-                Pagos p
-            JOIN 
-                Clientes c 
-            ON 
-                p.DNI = c.DNI
-            WHERE ";
+SELECT 
+    c.Nombre AS 'Nombre',
+    p.DNI AS 'Documento',
+    CASE WHEN c.Estado = 1 THEN 'Sí' ELSE 'No' END AS 'Activo',
+    p.PagoID AS 'PagoID',
+    c.Apellido AS 'Apellido',
+    p.Monto AS 'Monto Pagado',
+    p.MetodoPago AS 'Método de Pago',
+    p.FechaPago AS 'Fecha de Pago'
+FROM 
+    Pagos p
+INNER JOIN 
+    Clientes c ON p.DNI = c.DNI
+ORDER BY 
+    p.FechaPago DESC"";
+";
 
                 SqlParameter[] parametros;
 
