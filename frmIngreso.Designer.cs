@@ -43,7 +43,7 @@
             // btnIngresar
             // 
             btnIngresar.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            btnIngresar.Location = new Point(621, 379);
+            btnIngresar.Location = new Point(615, 379);
             btnIngresar.Margin = new Padding(3, 2, 3, 2);
             btnIngresar.Name = "btnIngresar";
             btnIngresar.Size = new Size(163, 59);
@@ -55,7 +55,7 @@
             // txtDniIngreso
             // 
             txtDniIngreso.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            txtDniIngreso.Location = new Point(517, 310);
+            txtDniIngreso.Location = new Point(512, 310);
             txtDniIngreso.Margin = new Padding(3, 2, 3, 2);
             txtDniIngreso.Multiline = true;
             txtDniIngreso.Name = "txtDniIngreso";
@@ -66,8 +66,9 @@
             // lblAvisoIngreso
             // 
             lblAvisoIngreso.BackColor = Color.Transparent;
+            lblAvisoIngreso.BorderStyle = BorderStyle.Fixed3D;
             lblAvisoIngreso.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblAvisoIngreso.Location = new Point(308, 440);
+            lblAvisoIngreso.Location = new Point(297, 440);
             lblAvisoIngreso.Name = "lblAvisoIngreso";
             lblAvisoIngreso.Size = new Size(798, 117);
             lblAvisoIngreso.TabIndex = 2;
@@ -82,7 +83,8 @@
             // 
             lblDniIngrese.AutoSize = true;
             lblDniIngrese.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point);
-            lblDniIngrese.Location = new Point(495, 243);
+            lblDniIngrese.ForeColor = Color.Black;
+            lblDniIngrese.Location = new Point(489, 243);
             lblDniIngrese.Name = "lblDniIngrese";
             lblDniIngrese.Size = new Size(414, 65);
             lblDniIngrese.TabIndex = 3;
@@ -100,8 +102,9 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = Properties.Resources.image_removebg_preview__1_;
-            pictureBox1.Location = new Point(428, -50);
+            pictureBox1.Location = new Point(440, -50);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(513, 304);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;

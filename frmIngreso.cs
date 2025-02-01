@@ -54,7 +54,7 @@ namespace pryAccesoGym
                 if (string.IsNullOrWhiteSpace(dni))
                 {
                     lblAvisoIngreso.Text = "Por favor, ingrese un DNI válido.";
-                    lblAvisoIngreso.ForeColor = Color.Red;
+                    lblAvisoIngreso.ForeColor = Color.DarkRed;
                     return;
                 }
 
@@ -67,7 +67,7 @@ namespace pryAccesoGym
                 if (nombreClienteObj == null || nombreClienteObj == DBNull.Value)
                 {
                     lblAvisoIngreso.Text = "El DNI no está registrado en el sistema.";
-                    lblAvisoIngreso.ForeColor = Color.Red;
+                    lblAvisoIngreso.ForeColor = Color.DarkRed;
                     return;
                 }
 
@@ -87,7 +87,7 @@ namespace pryAccesoGym
                 if (fechaPagoObj == null || fechaPagoObj == DBNull.Value)
                 {
                     lblAvisoIngreso.Text = $"No se encontraron pagos registrados para {nombreCliente}.";
-                    lblAvisoIngreso.ForeColor = Color.Red;
+                    lblAvisoIngreso.ForeColor = Color.DarkRed;
                     return;
                 }
                 txtDniIngreso.Text = "";
@@ -98,12 +98,12 @@ namespace pryAccesoGym
                 if (DateTime.Now >= fechaLimiteAviso && DateTime.Now < fechaProximoPago)
                 {
                     lblAvisoIngreso.Text = $"{nombreCliente}, su cuota vence el {fechaProximoPago:dd/MM/yyyy}.";
-                    lblAvisoIngreso.ForeColor = Color.Orange; 
+                    lblAvisoIngreso.ForeColor = Color.Peru; 
                 }
                 else if (DateTime.Now >= fechaProximoPago)
                 {
                     lblAvisoIngreso.Text = $"{nombreCliente}, su cuota venció el {fechaProximoPago:dd/MM/yyyy}. Comunicarse con Administración";
-                    lblAvisoIngreso.ForeColor = Color.Red;
+                    lblAvisoIngreso.ForeColor = Color.DarkRed;
                 }
                 else
                 {// Lista de mensajes de bienvenida
@@ -117,7 +117,7 @@ namespace pryAccesoGym
                     Random random = new Random();
                     string mensajeAleatorio = mensajesBienvenida[random.Next(mensajesBienvenida.Length)];
                     lblAvisoIngreso.Text = mensajeAleatorio;
-                    lblAvisoIngreso.ForeColor = Color.Green;
+                    lblAvisoIngreso.ForeColor = Color.DarkGreen;
                 }
             }
             catch (Exception ex)

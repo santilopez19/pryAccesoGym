@@ -25,6 +25,7 @@ namespace pryAccesoGym
         {
             frmClientes frmClientes = new frmClientes();
             frmClientes.Show();
+            this.Hide();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -298,8 +299,30 @@ ORDER BY
             {
                 if (dgvClientes.CurrentRow != null)
                 {
+                    // Obtener el PagoID y el DNI actual del pago seleccionado
                     int pagoID = Convert.ToInt32(dgvClientes.CurrentRow.Cells["PagoID"].Value);
+                    string dniActual = dgvClientes.CurrentRow.Cells["Documento"].Value.ToString();
                     string nuevoDni = txtDniAbono.Text.Trim();
+
+                    // Verificar si el DNI ha cambiado
+                    if (nuevoDni != dniActual)
+                    {
+                        // Mostrar mensaje amigable indicando que no se puede modificar el DNI
+                        string mensaje = "Lo sentimos, el DNI no puede ser modificado.\n\n"+
+                                         "Si necesitas cambiar esta información, por favor, elimina este pago y " +
+                                         "crea uno nuevo con el DNI correcto.";
+
+                        MessageBox.Show(
+                            mensaje,                           // Mensaje a mostrar
+                            "Modificación no permitida",       // Título del MessageBox
+                            MessageBoxButtons.OK,              // Botón "Aceptar"
+                            MessageBoxIcon.Warning             // Ícono de advertencia
+                        );
+
+                        return; // Detener la operación
+                    }
+
+                    // Si el DNI no ha cambiado, continuar con la modificación de otros campos
                     string montoTexto = txtMonto.Text.Trim();
                     decimal monto;
 
@@ -325,11 +348,10 @@ ORDER BY
 
                     DateTime fechaPago = dtpFechaPago.Value;
 
-                    string query = "UPDATE Pagos SET DNI = @DNI, Monto = @Monto, MetodoPago = @MetodoPago, FechaPago = @FechaPago WHERE PagoID = @PagoID";
+                    string query = "UPDATE Pagos SET Monto = @Monto, MetodoPago = @MetodoPago, FechaPago = @FechaPago WHERE PagoID = @PagoID";
 
                     int filasAfectadas = DatabaseHelper.ExecuteNonQuery(query, new SqlParameter[]
                     {
-                new SqlParameter("@DNI", nuevoDni),
                 new SqlParameter("@Monto", monto),
                 new SqlParameter("@MetodoPago", metodoPago),
                 new SqlParameter("@FechaPago", fechaPago),
